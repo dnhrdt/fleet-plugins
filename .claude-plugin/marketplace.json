@@ -1,13 +1,16 @@
 {
-  "version": "1.0",
-  "name": "Fleet Plugins Marketplace",
+  "name": "fleet-plugins",
+  "version": "1.0.0",
   "description": "Official Fleet plugin repository for Claude Code",
+  "owner": {
+    "name": "Michael Deinhardt"
+  },
   "plugins": [
     {
       "name": "fleet-dev",
       "version": "1.0.0",
       "description": "Development Operations Plugin - Setup, Linting, Obsidian Sync, DSGVO Check, Deployment",
-      "pluginRoot": "plugins/fleet-dev",
+      "source": "./plugins/fleet-dev",
       "tags": ["development", "linting", "deployment", "obsidian", "dsgvo"]
     }
   ]
