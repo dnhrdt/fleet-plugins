@@ -1,0 +1,13 @@
+{
+  "name": "fleet-core",
+  "version": "1.0.0",
+  "description": "Core utilities for all Fleet instances. Includes housekeeping, debugging, and feedback skills.",
+  "author": {
+    "name": "Michael Deinhardt"
+  },
+  "skills": [
+    "./skills/housekeeping",
+    "./skills/debugging",
+    "./skills/feedback"
+  ]
+}
