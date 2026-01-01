@@ -5,9 +5,10 @@ description: Create structured feedback issues on GitHub for template/plugin imp
 
 # Feedback Skill
 
+<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
 Version: 3.10
+<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
 Timestamp: 2026-01-01 21:50 CET
-<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ## Purpose
 

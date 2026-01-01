@@ -5,9 +5,10 @@ description: Memory Bank maintenance - YOUR memory, not just data. Relevance-bas
 
 # Housekeeping Skill
 
-Version: 3.01
-Timestamp: 2026-01-01 21:50 CET
-<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
+<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
+Version: 3.10
+<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
+Timestamp: 2026-01-01 23:45 CET
 
 ---
 
@@ -86,6 +87,40 @@ Load when:
 - activeContext.md feels cluttered or unfocused
 - Redundancies suspected across files
 - User requests housekeeping
+
+---
+
+## Phase 1.5: techContext.md Special Handling (MANDATORY)
+
+**techContext.md contains STATIC REFERENCE DATA only.**
+
+This file is fundamentally different from activeContext.md:
+- activeContext.md = dynamic (changes every session)
+- techContext.md = static (changes only when config changes)
+
+**REFERENCE DATA (NEVER archive/reduce):**
+- Database credentials (host, user, password, port)
+- SSH access (host, port, user, key paths)
+- Server configuration (tunnel commands, paths)
+- Multisite structure (site IDs, domains, table prefixes)
+- API keys and endpoints
+- Production paths and URLs
+
+**Rule:** Reference data may ONLY be changed when the actual configuration changes (new password, new server, etc.).
+
+**Checklist BEFORE any techContext.md changes:**
+- [ ] All credentials still present?
+- [ ] All SSH access documented?
+- [ ] All server paths intact?
+- [ ] All API endpoints listed?
+- [ ] All tool configurations preserved?
+
+**If ANY checkbox is NO → STOP, do not modify!**
+
+**When techContext.md CAN be reduced:**
+- Duplicate information (same thing documented twice)
+- Outdated config (server no longer exists)
+- But ONLY after explicit user confirmation
 
 ---
 

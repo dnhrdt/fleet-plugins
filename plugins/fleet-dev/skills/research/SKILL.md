@@ -5,9 +5,10 @@ description: Create async research issues on GitHub. Claude researches in backgr
 
 # Research Skill
 
+<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
 Version: 1.00
+<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
 Timestamp: 2025-01-01 17:30 CET
-<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ## Purpose
 

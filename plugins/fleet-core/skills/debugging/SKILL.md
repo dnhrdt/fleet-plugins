@@ -5,9 +5,10 @@ description: Anti-panic systematic debugging methodology. Activates scientific d
 
 # Debugging Skill
 
+<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
 Version: 2.00
+<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
 Timestamp: 2025-11-11 23:45 CET
-<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ---
 

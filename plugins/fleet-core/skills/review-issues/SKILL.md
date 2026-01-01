@@ -5,9 +5,10 @@ description: Review open issues from Fleet repositories (fleet-plugins, claude-r
 
 # Review Issues Skill
 
+<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
 Version: 2.10
+<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
 Timestamp: 2026-01-01 22:27 CET
-<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ## Purpose
 

@@ -5,9 +5,10 @@ description: Deployment strategies, folder structures, and workflows for creatin
 
 # Deployment Skill - Best Practices & Workflow
 
-Version: 1.01
-Timestamp: 2025-10-03 11:45 CET
-<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
+<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
+Version: 1.10
+<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
+Timestamp: 2026-01-02 00:24 CET
 
 ## Overview
 
@@ -106,3 +107,69 @@ deployment/
    - **NOTE:** Simple `7z` command doesn't work in Git Bash - use full path `/c/Program Files/7-Zip/7z.exe` (quoted because of spaces)
 **Commit**: ONLY after all above steps complete
 **Request Testing**: Ask user to test the changes
+
+---
+
+## Project Structure Guidelines
+
+### By Project Size
+
+**Minimal (1-3 files):**
+```
+project/
+├── main.py          ← Flat in root
+├── config.json
+└── README.md
+```
+
+**Small (4-10 files):**
+```
+project/
+├── src/             ← Code in /src/
+│   ├── main.py
+│   └── utils.py
+├── config.json      ← Config in root
+└── README.md
+```
+
+**Medium-Large (10+ files):**
+```
+project/
+├── src/
+├── tests/
+├── docs/
+├── scripts/
+└── README.md
+```
+
+### Language-Specific Conventions
+
+| Language | Small Project | Larger Project |
+|----------|---------------|----------------|
+| Node.js/TS | Always /src/ | /src/, /dist/, /tests/ |
+| Python | Flat OK | /src/ if pip-distributable |
+| PHP/WordPress | Plugin root | /includes/, /assets/, /templates/ |
+| Bash | Flat or /scripts/ | /scripts/, /lib/ |
+
+### Parallel Version Development
+
+**For major version work (v1 → v2):**
+```
+project/
+├── dev/
+│   └── v2.0/        ← All v2 work here
+│       ├── src/
+│       └── tests/
+├── src/             ← Current v1.x
+└── tests/
+```
+
+**When to use dev/vX.X/:**
+- Major version development
+- Large refactoring
+- Parallel feature branches
+
+**When NOT to use:**
+- Minor updates, bug fixes
+- Small features
+- Single-file changes

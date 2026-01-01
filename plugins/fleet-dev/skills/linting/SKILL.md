@@ -5,9 +5,10 @@ description: Linting system integration for code quality enforcement. Deploys pr
 
 # Linting Integration Skill
 
+<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
 Version: 2.10
+<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
 Timestamp: 2025-11-27 19:00 CET
-<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ## ⚠️ CRITICAL: Glob and Hidden Files
 
