@@ -5,8 +5,8 @@ description: Review open issues from Fleet repositories (fleet-plugins, claude-r
 
 # Review Issues Skill
 
-Version: 2.00
-Timestamp: 2025-01-01 19:50 CET
+Version: 2.01
+Timestamp: 2026-01-01 21:52 CET
 
 ## Purpose
 
@@ -43,8 +43,8 @@ Read and process open issues from Fleet repositories. Handles:
 ```bash
 echo "=== Fleet Issues Overview ==="
 echo ""
-echo "fleet-plugins (pending):"
-"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/fleet-plugins --label "pending" --json number,title --jq '.[] | "  #\(.number): \(.title)"' 2>/dev/null || echo "  (none or error)"
+echo "fleet-plugins (all open):"
+"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/fleet-plugins --state open --json number,title,labels --jq '.[] | "  #\(.number): \(.title) [\(.labels | map(.name) | join(", "))]"' 2>/dev/null || echo "  (none or error)"
 echo ""
 echo "claude-research (needs-context):"
 "/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/claude-research --label "needs-context" --json number,title --jq '.[] | "  #\(.number): \(.title)"' 2>/dev/null || echo "  (none or error)"
@@ -52,6 +52,8 @@ echo ""
 echo "claude-research (open research):"
 "/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/claude-research --label "research" --state open --json number,title --jq '.[] | "  #\(.number): \(.title)"' 2>/dev/null || echo "  (none or error)"
 ```
+
+**Note:** fleet-plugins shows ALL open issues regardless of label. Labels are shown for categorization.
 
 ### Step 2: Detailed Review (if issues found)
 

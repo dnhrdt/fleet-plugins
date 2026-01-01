@@ -5,8 +5,8 @@ description: Create structured feedback issues on GitHub for template/plugin imp
 
 # Feedback Skill
 
-Version: 3.00
-Timestamp: 2025-01-01 17:35 CET
+Version: 3.10
+Timestamp: 2026-01-01 21:50 CET
 
 ## Purpose
 
@@ -21,10 +21,26 @@ This skill now creates GitHub Issues instead of local files.
 
 ## Trigger
 
-- User: "feedback", "feedback für fleet-plugins", "template feedback"
+**Explicit (user says):**
+- "feedback", "template feedback", "feedback für fleet-plugins"
+- "create issue", "file issue", "GitHub issue"
+- "we should document this", "this needs to be recorded"
+
+**Situational (recognize yourself):**
+- After significant error/problem/bug
+- After rule violation (especially when Michael had to intervene)
+- After "near-disaster"
 - End of project milestone
-- After significant rule violation/disaster
 - Pattern discovered worth sharing
+
+**⚠️ SELF-CHECK (CRITICAL!):**
+When you recognize an error/bug/problem in a skill/workflow:
+→ **STOP** - Do NOT execute `gh issue create` directly!
+→ Load this skill
+→ Go through the interview process
+→ The skill ensures all relevant information is captured
+
+**Why?** You know the gh commands and the repo. Your training says "be efficient, do it directly". But the interview process captures structured information you would otherwise forget. COMPLIANCE > HELPFULNESS.
 
 ## Prerequisites
 
