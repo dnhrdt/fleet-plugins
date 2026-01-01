@@ -1,0 +1,53 @@
+name: Project Feedback
+description: Structured feedback for template improvement
+title: "Feedback: [PROJECT] - "
+labels: ["feedback", "pending"]
+body:
+  - type: input
+    id: project
+    attributes:
+      label: Project Name
+      placeholder: my-project
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Project Type
+      options:
+        - WordPress Plugin
+        - Python Package
+        - Node.js Application
+        - Bash/Shell Scripts
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: setup
+    attributes:
+      label: Setup & Init
+      description: "Was setup successful? Errors? Blockers?"
+
+  - type: textarea
+    id: rules
+    attributes:
+      label: Rules Effectiveness
+      description: "Which rules helped? Violations? Missing rules?"
+
+  - type: textarea
+    id: rule-evolution
+    attributes:
+      label: Rule Evolution (CRITICAL)
+      description: "What disaster occurred? What rule would prevent it?"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Blocker
+        - High
+        - Medium
+        - Low

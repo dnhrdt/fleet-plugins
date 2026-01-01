@@ -1,0 +1,15 @@
+# DSGVO Check Configuration
+# Copy to .dsgvo-check.conf in project root and customize
+#
+# This file configures customer data patterns to detect in commits
+
+# Customer domains (pipe-separated regex pattern)
+# Example: CUSTOMER_DOMAINS="customerdomain\.com|anotherclient\.de|client\.net"
+CUSTOMER_DOMAINS=""
+
+# Customer names (pipe-separated regex pattern)
+# Example: CUSTOMER_NAMES="ACME Corp|Customer Inc|ClientName GmbH"
+CUSTOMER_NAMES=""
+
+# Additional patterns can be added here
+# All patterns use grep -E syntax (extended regex)
