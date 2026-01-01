@@ -7,6 +7,7 @@ description: Git-Obsidian-Sync integration for automatic Memory Bank backup. One
 
 Version: 2.20
 Timestamp: 2025-11-27 19:30 CET
+<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 A plug-and-play system for automatic synchronization of your `memory-bank` with an Obsidian Vault after every Git commit.
 

@@ -7,6 +7,7 @@ description: DSGVO/GDPR customer data check for preventing data leaks in Git com
 
 Version: 1.10
 Timestamp: 2025-11-27 20:00 CET
+<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ---
 

@@ -7,6 +7,7 @@ description: Anti-panic systematic debugging methodology. Activates scientific d
 
 Version: 2.00
 Timestamp: 2025-11-11 23:45 CET
+<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ---
 

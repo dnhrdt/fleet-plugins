@@ -7,6 +7,7 @@ description: Deployment strategies, folder structures, and workflows for creatin
 
 Version: 1.01
 Timestamp: 2025-10-03 11:45 CET
+<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ## Overview
 

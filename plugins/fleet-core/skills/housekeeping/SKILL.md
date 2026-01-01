@@ -7,6 +7,7 @@ description: Memory Bank maintenance - YOUR memory, not just data. Relevance-bas
 
 Version: 3.01
 Timestamp: 2026-01-01 21:50 CET
+<!-- ⚠️ ON EDIT: date "+%H:%M" → update timestamp, +0.01 minor | +0.10 significant | +1.00 major -->
 
 ---
 
