@@ -5,8 +5,8 @@ description: Review open issues from Fleet repositories (fleet-plugins, claude-r
 
 # Review Issues Skill
 
-Version: 2.01
-Timestamp: 2026-01-01 21:52 CET
+Version: 2.10
+Timestamp: 2026-01-01 22:27 CET
 
 ## Purpose
 
@@ -56,6 +56,11 @@ echo "claude-research (open research):"
 **Note:** fleet-plugins shows ALL open issues regardless of label. Labels are shown for categorization.
 
 ### Step 2: Detailed Review (if issues found)
+
+**⚠️ BEFORE reading any issue in detail:**
+1. Add to your TodoWrite: `"Fixes #X - [brief description]"` (status: pending)
+2. This ensures you remember to include `Fixes #X` in your commit message
+3. GitHub will automatically close the issue when you push
 
 **For fleet-plugins issues:**
 ```bash
@@ -169,19 +174,29 @@ When Research-Claude completes research:
 
 ## After Processing
 
-Mark issues as processed:
-
-**fleet-plugins:**
+**Commit with `Fixes #X` in the message:**
 ```bash
-"/c/Program Files/GitHub CLI/gh.exe" issue edit [NUMBER] \
-  --repo dnhrdt/fleet-plugins \
-  --remove-label "pending" \
-  --add-label "processed"
-"/c/Program Files/GitHub CLI/gh.exe" issue comment [NUMBER] \
-  --repo dnhrdt/fleet-plugins \
-  --body "Processed in session [DATE]. Changes applied."
+git commit -m "$(cat <<'EOF'
+Fixes #X - Brief description of what was fixed
+
+Details of changes...
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+EOF
+)"
+git push
+# → GitHub automatically closes Issue #X
+```
+
+**No manual closing needed!** The `Fixes #X` keyword does it automatically.
+
+**If you forgot `Fixes #X` in your commit:**
+```bash
 "/c/Program Files/GitHub CLI/gh.exe" issue close [NUMBER] \
-  --repo dnhrdt/fleet-plugins
+  --repo dnhrdt/fleet-plugins \
+  --comment "Fixed in commit [HASH]. Session [DATE]."
 ```
 
 ---
