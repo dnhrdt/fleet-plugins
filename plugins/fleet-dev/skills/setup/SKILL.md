@@ -6,9 +6,9 @@ description: Complete project initialization and setup workflow. Creates Memory 
 # Project Setup Skill
 
 <!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 3.10
+Version: 3.20
 <!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2025-11-27 20:00 CET
+Timestamp: 2026-01-02 14:00 CET
 
 ---
 
@@ -115,7 +115,23 @@ fi
 
 **⚠️ SKIP this phase if .claude-init-pending was found in Phase 0**
 
-**Ask user these questions:**
+**First, determine project origin:**
+
+```
+Ask: "Is this a new project or a fork/clone of an existing repository?"
+
+If NEW PROJECT:
+- Continue with questions below
+- Full tool configuration in Phase 3
+
+If FORK/CLONE:
+- Clone/fork the repository FIRST
+- Analyze existing configs (package.json, pyproject.toml, etc.)
+- Skip linting questions - analyze what's already there
+- Only offer to EXTEND existing tooling, not replace
+```
+
+**For new projects, ask user these questions:**
 
 1. **Project Name**: "What is the project name?" (lowercase, hyphens OK)
 2. **Project Type**:
@@ -181,7 +197,7 @@ Default: Yes
 
 If Yes:
 - Load obsidian skill for setup instructions
-- Will be configured in Phase 6
+- Will be configured in Phase 7
 ```
 
 **Linting System** (For production/public projects)
@@ -192,7 +208,7 @@ Default: Based on project type
 
 If Yes:
 - Load linting skill for setup instructions
-- Will be configured in Phase 6
+- Will be configured in Phase 7
 ```
 
 **DSGVO Check** (For public repos)
@@ -203,7 +219,7 @@ Default: Based on repo visibility
 
 If Yes:
 - Load dsgvo skill for setup instructions
-- Will be configured in Phase 6
+- Will be configured in Phase 7
 ```
 
 **⚠️ CRITICAL PROCESS - NO EXCEPTIONS:**
@@ -247,7 +263,42 @@ __pycache__/
 
 ---
 
-### Phase 5: Memory Bank Creation (2-3 minutes)
+### Phase 5: Git Repository Setup
+
+**⚠️ CRITICAL: Git must be initialized BEFORE tool setup (hooks need .git/ directory)**
+
+**If .git/ already exists:**
+- Skip initialization
+- Continue with Phase 6
+
+**If .git/ missing:**
+```bash
+# Initialize repository
+git init
+git branch -M main
+
+# Add initial files
+git add .gitignore
+git commit -m "$(cat <<'EOF'
+Initial project structure
+
+- Created .gitignore (DSGVO compliant)
+
+🤖 Generated with Claude Code
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+EOF
+)"
+```
+
+**Why Git init comes before tools:**
+- Obsidian sync requires `.git/hooks/` directory for post-commit hook
+- DSGVO check uses pre-commit hooks
+- All hook-based tools need `.git/` to exist first
+
+---
+
+### Phase 6: Memory Bank Creation (2-3 minutes)
 
 **Create directory:**
 ```bash
@@ -338,7 +389,7 @@ Timestamp: YYYY-MM-DD HH:MM CET
 
 ---
 
-### Phase 6: Tool Setup (if tools enabled)
+### Phase 7: Tool Setup (if tools enabled)
 
 **⚠️ STOP: Before loading any skill, verify tools directory exists:**
 ```bash
@@ -369,7 +420,7 @@ ls -la tools/
 
 ---
 
-### Phase 7: Project-Specific CLAUDE.md (Optional)
+### Phase 8: Project-Specific CLAUDE.md (Optional)
 
 **If project needs specific rules beyond global CLAUDE.md:**
 
@@ -398,14 +449,13 @@ Timestamp: YYYY-MM-DD HH:MM CET
 
 ---
 
-### Phase 8: Git Repository Setup
+### Phase 9: Final Commit & Verification
 
-**If .git/ exists:**
+**Commit all setup files:**
 ```bash
-# Add setup files (NOTE: memory-bank/ is .gitignored, won't be added)
-git add .gitignore .git-obsidian-sync.json
+git add .gitignore .git-obsidian-sync.json CLAUDE.md
 git commit -m "$(cat <<'EOF'
-Initial project setup
+Complete project setup
 
 - Created Memory Bank (3-file lean system)
 - Configured .gitignore (DSGVO compliant)
@@ -420,40 +470,16 @@ EOF
 )"
 ```
 
-**If .git/ missing:**
-```bash
-# Initialize repository
-git init
-git branch -M main
-git add .
-git commit -m "$(cat <<'EOF'
-Initial project setup with Claude
-
-- Project structure initialized
-- Memory Bank created
-- Tools configured
-
-🤖 Generated with Claude Code
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-EOF
-)"
-```
-
 **If Obsidian sync enabled:**
 - Verify commit triggered sync
 - Check Obsidian Vault for new project folder
 
----
-
-### Phase 9: Verification & Completion
-
 **Verify checklist:**
 - [ ] .gitignore created with memory-bank/ excluded
+- [ ] Git repository initialized
 - [ ] Memory Bank created with all 3 files (local only)
 - [ ] All headers have Version + Timestamp
 - [ ] Memory Bank content matches project context
-- [ ] Git repository initialized (if needed)
 - [ ] Initial commit completed (memory-bank/ NOT in git)
 - [ ] Obsidian sync configured and tested (if enabled)
 - [ ] Linting system ready (if enabled)
@@ -500,6 +526,33 @@ If integrating setup into existing project:
 
 ---
 
+## Fork/Clone Project Workflow
+
+**When user indicates fork/clone:**
+
+1. **Clone First**
+   ```bash
+   git clone <repository-url>
+   cd <project-name>
+   ```
+
+2. **Analyze Existing Setup**
+   - Check for existing linting configs (.eslintrc, pyproject.toml, etc.)
+   - Check for existing CI/CD (.github/workflows/)
+   - Check for existing documentation
+
+3. **Extend, Don't Replace**
+   - If linting exists → Only offer improvements
+   - If CI exists → Integrate with existing
+   - Add Memory Bank alongside existing docs
+
+4. **Continue with Phase 4+**
+   - .gitignore: MERGE with existing (don't overwrite)
+   - Git: Already initialized (skip Phase 5)
+   - Tools: Only add what's missing
+
+---
+
 ## Troubleshooting Setup
 
 ### Memory Bank Creation Fails
@@ -528,8 +581,17 @@ If integrating setup into existing project:
 ```bash
 git init
 git branch -M main
-# Then continue with Phase 8
+# Then continue with Phase 6
 ```
+
+### Hook Installation Fails
+
+**Problem**: Cannot install git hooks
+
+**Solution**:
+- Verify `.git/` directory exists (Phase 5 must complete first)
+- Check permissions on `.git/hooks/`
+- Run `git init` if needed
 
 ### User Unsure About Questions
 
