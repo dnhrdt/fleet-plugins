@@ -1,7 +1,7 @@
 {
   "name": "fleet-dev",
-  "version": "1.3.0",
-  "description": "Development Operations for Fleet projects. Includes setup, linting, obsidian sync, dsgvo check, deployment, wordpress, and research skills.",
+  "version": "1.4.0",
+  "description": "Development Operations for Fleet projects. Includes setup, linting, obsidian sync, dsgvo check, deployment, wordpress, statusline, and research skills.",
   "author": {
     "name": "Michael Deinhardt"
   },
@@ -12,6 +12,7 @@
     "./skills/dsgvo",
     "./skills/deployment",
     "./skills/wordpress",
+    "./skills/statusline",
     "./skills/research"
   ]
 }
