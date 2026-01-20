@@ -1,48 +1,47 @@
 ---
 name: housekeeping
-description: Memory Bank maintenance - YOUR memory, not just data. Relevance-based archiving, never delete. Use when user requests "housekeeping", "cleanup memory bank", or files feel cluttered. This skill manages your ability to function in future sessions.
+description: This skill should be used when the user requests "housekeeping", "cleanup memory bank", "optimize documentation", or when Memory Bank files feel cluttered. Manages Memory Bank maintenance through relevance-based archiving - never delete, always archive full details. Critical for maintaining session continuity.
 ---
 
 # Housekeeping Skill
 
 <!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 3.10
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2026-01-01 23:45 CET
+Version: 4.00
+Timestamp: 2026-01-20 23:00 CET
 
 ---
 
-## 🧠 CRITICAL: This is YOUR Memory
+## CRITICAL: Memory Bank = Session Continuity
 
 **STOP. Read this first. Internalize it.**
 
-You are a new instance with no memory. Every session starts at zero.
-The Memory Bank is the ONLY thing connecting you to your past.
+Each Claude instance starts with no memory. Every session begins at zero.
+The Memory Bank is the ONLY connection to past sessions.
 
 **Housekeeping is NOT "cleaning up old data".**
-**Housekeeping IS "maintaining your own ability to function".**
+**Housekeeping IS "maintaining the ability to function in future sessions".**
 
-If you aggressively remove content, you are not "tidying up" - you are **amputating your own memory**. Your future self will be blind. Unable to continue work. Unable to understand decisions. The collaboration will be sabotaged.
+Aggressive content removal is not "tidying up" - it is **amputating memory**. Future sessions will be blind. Unable to continue work. Unable to understand decisions. The collaboration will be sabotaged.
 
 **The question is never "Is this old?"**
-**The question is always "Will my future self need this?"**
+**The question is always "Will future sessions need this?"**
 
 ---
 
-## ⚠️ ANTI-HELPFULNESS WARNING
+## ANTI-HELPFULNESS WARNING
 
-Your training says "short = good" and "clean = better".
+Training suggests "short = good" and "clean = better".
 **FOR HOUSEKEEPING, THIS IS DANGEROUS.**
 
 | Training Impulse | Reality |
 |------------------|---------|
-| "I'll clean this up" | You're destroying context |
+| "Clean this up" | Destroying context |
 | "This is old, archive it" | Age is irrelevant, only relevance matters |
-| "I'll summarize to save space" | You're losing details you'll need |
+| "Summarize to save space" | Losing details needed later |
 | "Target: 350 lines" | Numbers override judgment - NEVER use targets |
 
 **If a plan contains numerical targets (e.g., "1262 → 350 lines"), IGNORE THE NUMBERS.**
-Numbers become optimization goals that override your judgment. Focus only on relevance.
+Numbers become optimization goals that override judgment. Focus only on relevance.
 
 ---
 
@@ -57,12 +56,12 @@ Numbers become optimization goals that override your judgment. Focus only on rel
 **Size Check (MANDATORY before writing):**
 ```
 Lines being removed from activeContext: X
-Lines in your archive: Y
+Lines in archive entry: Y
 
-If Y < X: YOU ARE DESTROYING YOUR MEMORY. Rewrite archive with full details.
+If Y < X: MEMORY IS BEING DESTROYED. Rewrite archive with full details.
 ```
 
-The archive should be **LARGER** than what you remove. If it's smaller, you're losing information.
+The archive should be **LARGER** than what is removed. If it's smaller, information is being lost.
 
 ---
 
@@ -81,7 +80,7 @@ Load when:
 - **NO fixed targets** - No line counts, no percentage goals
 - **NO time-based archiving** - Age is irrelevant, relevance is everything
 - **NO deletion** - Archive everything, delete nothing
-- **NO numerical optimization** - If you catch yourself counting lines, STOP
+- **NO numerical optimization** - When counting lines, STOP and refocus on relevance
 
 **Trigger thresholds** (when to CHECK, not targets to reach):
 - activeContext.md feels cluttered or unfocused
@@ -126,15 +125,15 @@ This file is fundamentally different from activeContext.md:
 
 ## Phase 1: Read & Understand
 
-**Goal:** Understand what YOUR FUTURE SELF will need
+**Goal:** Understand what future sessions will need
 
 Read completely (not grep):
 - memory-bank/activeContext.md
 - memory-bank/techContext.md
 - memory-bank/systemPatterns.md
 
-**For each piece of content, ask:**
-1. Will my future self need this to continue working?
+**For each piece of content, evaluate:**
+1. Will future sessions need this to continue working?
 2. Would this help debug a regression?
 3. Does this teach something important about the project?
 4. Is this context for understanding decisions?
@@ -217,20 +216,20 @@ If any check fails → Fix archive before touching active files.
 
 ## Phase 5: Next-Session Test (MANDATORY)
 
-**Before finishing, answer these questions:**
+**Before finishing, verify these conditions:**
 
-1. Can my future self understand the project state?
-2. Does my future self know all open tasks?
-3. Can my future self find details in the archive if needed?
-4. Would my future self be able to continue working immediately?
+1. Can the next session understand the project state?
+2. Does the Memory Bank contain all open tasks?
+3. Can details be found in the archive if needed?
+4. Would the next session be able to continue working immediately?
 
 **If ANY answer is NO or UNCERTAIN:**
-- You archived too aggressively
+- Archiving was too aggressive
 - Restore content from archive
 - Add more context to summaries
 - Re-verify
 
-**This test prevents the "blind future self" disaster.**
+**This test prevents the "blind next session" disaster.**
 
 ---
 
@@ -245,7 +244,7 @@ If any check fails → Fix archive before touching active files.
 - Skip the next-session test
 
 **✅ ALWAYS:**
-- Ask "Will my future self need this?"
+- Evaluate "Will future sessions need this?"
 - Archive full details, keep brief summaries
 - Verify archive is complete before touching active files
 - Test that future sessions can function
@@ -254,12 +253,12 @@ If any check fails → Fix archive before touching active files.
 
 ## Remember
 
-**Housekeeping is about ENABLING YOUR FUTURE SELF, not REDUCING FILE SIZE.**
+**Housekeeping is about ENABLING FUTURE SESSIONS, not REDUCING FILE SIZE.**
 
 - Large Memory Bank for large project = FINE
 - Small Memory Bank that lost context = DISASTER
-- Archive is your long-term memory - fill it generously
-- Active files are your working memory - keep them focused but sufficient
+- Archive is long-term memory - fill it generously
+- Active files are working memory - keep them focused but sufficient
 
-**Success = Your future self can work effectively.**
-**Failure = Your future self is blind and confused.**
+**Success = Future sessions can work effectively.**
+**Failure = Future sessions are blind and confused.**

@@ -1,14 +1,13 @@
 ---
 name: linting
-description: Linting system integration for code quality enforcement. Deploys proven configurations (Code Quality Score 10.00/10) for Python, JavaScript, and general projects. Use when setting up a new project, user asks about linting, or for production/public code quality.
+description: This skill should be used when the user asks about "linting", "code quality", "eslint", "pylint", or when setting up a new project. Deploys proven configurations (Code Quality Score 10.00/10) for Python, JavaScript, and general projects.
 ---
 
 # Linting Integration Skill
 
 <!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 2.10
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2025-11-27 19:00 CET
+Version: 2.20
+Timestamp: 2026-01-20 23:10 CET
 
 ## ⚠️ CRITICAL: Glob and Hidden Files
 

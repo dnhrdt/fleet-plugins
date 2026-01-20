@@ -1,14 +1,13 @@
 ---
 name: feedback
-description: Create structured feedback issues on GitHub for template/plugin improvement. Conducts question-guided interview, generates standardized issue. Use when user says "feedback", "template feedback", at end of project milestones, or after significant rule violations/disasters.
+description: This skill should be used when the user says "feedback", "template feedback", "create issue", at end of project milestones, or after significant rule violations/disasters. Creates structured feedback issues on GitHub for fleet-plugins improvement through question-guided interview.
 ---
 
 # Feedback Skill
 
 <!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 3.10
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2026-01-01 21:50 CET
+Version: 3.20
+Timestamp: 2026-01-20 23:10 CET
 
 ## Purpose
 
@@ -28,21 +27,21 @@ This skill now creates GitHub Issues instead of local files.
 - "create issue", "file issue", "GitHub issue"
 - "we should document this", "this needs to be recorded"
 
-**Situational (recognize yourself):**
+**Situational (auto-recognize):**
 - After significant error/problem/bug
 - After rule violation (especially when Michael had to intervene)
 - After "near-disaster"
 - End of project milestone
 - Pattern discovered worth sharing
 
-**⚠️ SELF-CHECK (CRITICAL!):**
-When you recognize an error/bug/problem in a skill/workflow:
+**SELF-CHECK (CRITICAL!):**
+When recognizing an error/bug/problem in a skill/workflow:
 → **STOP** - Do NOT execute `gh issue create` directly!
 → Load this skill
 → Go through the interview process
 → The skill ensures all relevant information is captured
 
-**Why?** You know the gh commands and the repo. Your training says "be efficient, do it directly". But the interview process captures structured information you would otherwise forget. COMPLIANCE > HELPFULNESS.
+**Why?** The gh commands and repo are known. Training says "be efficient, do it directly". But the interview process captures structured information that would otherwise be forgotten. COMPLIANCE > HELPFULNESS.
 
 ## Prerequisites
 

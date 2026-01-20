@@ -1,14 +1,13 @@
 ---
 name: research
-description: Create async research issues on GitHub. Claude researches in background via GitHub Actions. Use when user says "research", "recherchiere async", or wants to delegate research to background processing.
+description: This skill should be used when the user says "research", "recherchiere async", "erstelle research issue", or wants to delegate research to background processing. Creates GitHub Issues for async research via GitHub Actions.
 ---
 
 # Research Skill
 
 <!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 1.00
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2025-01-01 17:30 CET
+Version: 1.10
+Timestamp: 2026-01-20 23:10 CET
 
 ## Purpose
 
