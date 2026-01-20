@@ -2,8 +2,8 @@
 
 Official plugin repository for the Fleet ecosystem (Claude Code).
 
-**Version:** 1.1.0  
-**Maintainer:** Michael Deinhardt  
+**Version:** 1.2.0
+**Maintainer:** Michael Deinhardt
 **Repository:** https://github.com/dnhrdt/fleet-plugins
 
 ---
@@ -19,7 +19,7 @@ Fleet Plugins provide specialized skills for Claude Code instances in the Fleet 
 
 ## Available Plugins
 
-### fleet-core v1.0.0
+### fleet-core v1.2.0
 
 **Purpose:** Core utilities that every Fleet instance needs.
 
@@ -28,22 +28,19 @@ Fleet Plugins provide specialized skills for Claude Code instances in the Fleet 
 | `housekeeping` | Memory Bank cleanup and optimization. Archives old entries, removes redundancies, maintains lean documentation. | "housekeeping", "cleanup memory bank" |
 | `debugging` | Systematic debugging methodology with STOP protocol, hypothesis-driven investigation, ONE CHANGE ONLY rule. | "debugging session", "systematic debugging" |
 | `feedback` | Create structured feedback issues on GitHub. Collects project feedback via guided interview. | "feedback", "template feedback" |
-
-**Installation:**
-```bash
-claude plugin install fleet-core
-```
+| `review-issues` | Review open issues from Fleet repositories. Categorizes and proposes changes. | "review issues", "check feedback" |
 
 **Usage:**
 ```
 /fleet-core:housekeeping
 /fleet-core:debugging
 /fleet-core:feedback
+/fleet-core:review-issues
 ```
 
 ---
 
-### fleet-dev v1.2.0
+### fleet-dev v1.5.0
 
 **Purpose:** Development operations for Fleet development workstations (primarily Han/Pellaeon).
 
@@ -54,12 +51,9 @@ claude plugin install fleet-core
 | `linting` | Linting system integration. Deploys proven configurations for Python, JavaScript, and general projects. | "setup linting", "linting" |
 | `dsgvo` | DSGVO/GDPR customer data check. Prevents data leaks in Git commits by detecting customer domains, real emails, server paths. | "dsgvo check", "data protection" |
 | `deployment` | Deployment strategies and workflows. Folder structures for production-ready releases. | "deploy", "release" |
+| `wordpress` | WordPress plugin development standards and patterns. | "wordpress plugin" |
+| `statusline` | Install context-monitor statusline for Claude Code. | "statusline", "context monitor" |
 | `research` | Create async research issues on GitHub. Research runs in background via GitHub Actions. | "research [topic]", "recherchiere async" |
-
-**Installation:**
-```bash
-claude plugin install fleet-dev
-```
 
 **Usage:**
 ```
@@ -68,6 +62,8 @@ claude plugin install fleet-dev
 /fleet-dev:linting
 /fleet-dev:dsgvo
 /fleet-dev:deployment
+/fleet-dev:wordpress
+/fleet-dev:statusline
 /fleet-dev:research
 ```
 
@@ -75,39 +71,121 @@ claude plugin install fleet-dev
 
 ## Installation
 
+**All commands are Claude Code slash-commands, not CLI commands!**
+
 ### Add Marketplace
 
-```bash
-# From GitHub (recommended)
-claude plugin marketplace add dnhrdt/fleet-plugins
+```
+# From GitHub (recommended for most users)
+/plugin marketplace add dnhrdt/fleet-plugins
 
-# From local path (for development)
-claude plugin marketplace add ./path/to/fleet-plugins
+# From local path (for development - see Development Workflow below)
+/plugin marketplace add /path/to/fleet-plugins
 ```
 
 ### Install Plugins
 
-```bash
+```
 # Install core utilities (recommended for all instances)
-claude plugin install fleet-core
+/plugin install fleet-core@fleet-plugins
 
 # Install development tools (for dev workstations)
-claude plugin install fleet-dev
+/plugin install fleet-dev@fleet-plugins
 
-# List installed plugins
-claude plugin list
+# With scope options
+/plugin install fleet-dev@fleet-plugins --scope user     # Default: personal
+/plugin install fleet-dev@fleet-plugins --scope project  # Shared via .claude/settings.json
+/plugin install fleet-dev@fleet-plugins --scope local    # Gitignored, local only
 ```
 
 ### Update Plugins
 
-```bash
-# Update marketplace index
-claude plugin marketplace update fleet-plugins
-
-# Reinstall plugin for updates
-claude plugin uninstall fleet-dev
-claude plugin install fleet-dev
 ```
+# Update marketplace index and plugins
+/plugin marketplace update fleet-plugins
+/plugin update fleet-dev@fleet-plugins
+/plugin update fleet-core@fleet-plugins
+```
+
+### Other Commands
+
+```
+/plugin                              # Interactive plugin manager
+/plugin marketplace list             # List configured marketplaces
+/plugin disable fleet-dev@fleet-plugins   # Disable without uninstalling
+/plugin enable fleet-dev@fleet-plugins    # Re-enable
+/plugin uninstall fleet-dev@fleet-plugins # Remove completely
+```
+
+---
+
+## Development Workflow
+
+**For developing/modifying Fleet Plugins locally (Han/Pellaeon):**
+
+### Initial Setup (Once)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/dnhrdt/fleet-plugins.git D:/dev/Projects/fleet-plugins
+   ```
+
+2. Add as local marketplace in Claude Code:
+   ```
+   /plugin marketplace add D:/dev/Projects/fleet-plugins
+   ```
+
+3. Install plugins:
+   ```
+   /plugin install fleet-dev@fleet-plugins
+   /plugin install fleet-core@fleet-plugins
+   ```
+
+### Development Cycle
+
+1. **Edit skills** in `D:/dev/Projects/fleet-plugins/plugins/...`
+
+2. **Bump version** in `plugin.json`:
+   ```json
+   "version": "1.5.0"  // Increment for each change
+   ```
+
+3. **Commit and push**:
+   ```bash
+   cd D:/dev/Projects/fleet-plugins
+   git add .
+   git commit -m "Description of changes"
+   git push
+   ```
+
+4. **Update installed plugins** (in Claude Code):
+   ```
+   /plugin update fleet-dev@fleet-plugins
+   ```
+
+5. **Restart Claude Code session** to load updated skills
+
+### Cache Structure
+
+Claude Code caches installed plugins:
+
+```
+~/.claude/plugins/
+├── cache/
+│   └── fleet-plugins/
+│       ├── fleet-dev/1.5.0/      # Cached plugin files
+│       └── fleet-core/1.2.0/
+├── installed_plugins.json         # Tracks installed versions
+├── known_marketplaces.json        # Marketplace sources
+└── marketplaces/
+    └── fleet-plugins/             # Symlink or copy of marketplace
+```
+
+**If updates don't apply**, delete the cache and reinstall:
+```bash
+rm -rf ~/.claude/plugins/cache/fleet-plugins
+```
+Then restart Claude Code - plugins will be reinstalled from source.
 
 ---
 
@@ -120,28 +198,35 @@ fleet-plugins/
 ├── plugins/
 │   ├── fleet-core/
 │   │   ├── .claude-plugin/
-│   │   │   └── plugin.json     # Plugin manifest
+│   │   │   └── plugin.json     # Plugin manifest (name, version)
 │   │   └── skills/
 │   │       ├── housekeeping/
 │   │       │   └── SKILL.md
 │   │       ├── debugging/
 │   │       │   └── SKILL.md
-│   │       └── feedback/
+│   │       ├── feedback/
+│   │       │   └── SKILL.md
+│   │       └── review-issues/
 │   │           └── SKILL.md
 │   └── fleet-dev/
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── skills/
 │       │   ├── setup/
+│       │   │   ├── SKILL.md
+│       │   │   └── references/   # Progressive disclosure
 │       │   ├── obsidian/
 │       │   ├── linting/
 │       │   ├── dsgvo/
 │       │   ├── deployment/
+│       │   ├── wordpress/
+│       │   ├── statusline/
 │       │   └── research/
 │       └── tools/
 │           ├── obsidian-sync/
 │           ├── linting-system/
-│           └── dsgvo-check/
+│           ├── dsgvo-check/
+│           └── timestamp-hook/
 └── README.md
 ```
 
@@ -173,6 +258,13 @@ Creates GitHub Issues for structured feedback:
 - Question-guided interview (project context, rules effectiveness, lessons learned)
 - Labels: `feedback`, `pending`, `processed`, `blocker`
 - Stored in this repository's Issues
+
+### fleet-core:review-issues
+
+Reviews open issues from Fleet repositories:
+- Checks fleet-plugins and claude-research for pending issues
+- Categorizes by type (skill/workflow/pattern/context-request)
+- Proposes changes and tracks via `Fixes #X` in commits
 
 ### fleet-dev:research
 
