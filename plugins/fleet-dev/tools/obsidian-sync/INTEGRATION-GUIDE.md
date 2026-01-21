@@ -1,5 +1,7 @@
 # Cline Integration Guide: Git-Obsidian-Sync
 
+Version: 1.5.0
+
 A plug-and-play system for automatic synchronization of your `memory-bank` with an Obsidian Vault after every Git commit.
 
 ## 🎯 What does this tool do?

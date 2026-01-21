@@ -1,6 +1,6 @@
 # Cline Integration Guide for Linting System
-Version: 2.00
-Timestamp: 2025-07-27 21:36 CET
+
+Version: 1.5.0
 
 ## Overview
 

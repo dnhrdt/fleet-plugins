@@ -1,7 +1,6 @@
 # DSGVO Customer Data Check - Integration Guide
 
-Version: 1.00
-Timestamp: 2025-10-03 11:40 CET
+Version: 1.5.0
 
 ---
 
