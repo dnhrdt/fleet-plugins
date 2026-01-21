@@ -1,0 +1,11 @@
+{
+  "name": "maison",
+  "version": "1.0.0",
+  "description": "Skills for Maison project ecosystem. Feedback collection, patterns, and workflows for all Maison-related development (websites, integrations, server management).",
+  "author": {
+    "name": "Michael Deinhardt"
+  },
+  "skills": [
+    "./skills/feedback"
+  ]
+}

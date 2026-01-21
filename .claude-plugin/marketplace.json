@@ -19,6 +19,13 @@
       "description": "Development Operations - Setup, Linting, Obsidian, DSGVO, Deployment, Research",
       "source": "./plugins/fleet-dev",
       "tags": ["development", "linting", "deployment", "obsidian", "dsgvo", "research"]
+    },
+    {
+      "name": "maison",
+      "version": "1.0.0",
+      "description": "Maison project ecosystem - Feedback collection for websites, integrations, server management",
+      "source": "./plugins/maison",
+      "tags": ["maison", "feedback", "wordpress", "woocommerce"]
     }
   ]
 }
