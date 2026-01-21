@@ -1,14 +1,10 @@
 ---
 name: statusline
 description: Install context-monitor statusline for Claude Code. Shows context usage, model, session metrics. Use when setting up a new workstation or when statusline is missing.
+version: 1.5.0
 ---
 
 # Statusline Setup Skill
-
-<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 1.00
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2026-01-02 01:07 CET
 
 ---
 

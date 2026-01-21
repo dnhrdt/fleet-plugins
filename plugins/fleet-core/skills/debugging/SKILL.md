@@ -1,14 +1,10 @@
 ---
 name: debugging
 description: Anti-panic systematic debugging methodology. Activates scientific debugging method with STOP protocol, hypothesis-driven investigation, ONE CHANGE ONLY rule, and feedback iteration. Use when bugs are encountered, user says "debugging session" or "systematic debugging", or when you need to slow down your fix-impulse.
+version: 1.2.0
 ---
 
 # Debugging Skill
-
-<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 2.00
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2025-11-11 23:45 CET
 
 ---
 

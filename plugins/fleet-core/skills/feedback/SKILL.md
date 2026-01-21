@@ -1,13 +1,10 @@
 ---
 name: feedback
 description: This skill should be used when the user says "feedback", "template feedback", "create issue", at end of project milestones, or after significant rule violations/disasters. Creates structured feedback issues on GitHub for fleet-plugins improvement through question-guided interview.
+version: 1.2.0
 ---
 
 # Feedback Skill
-
-<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 3.20
-Timestamp: 2026-01-20 23:10 CET
 
 ## Purpose
 

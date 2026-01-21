@@ -1,14 +1,10 @@
 ---
 name: obsidian
 description: Git-Obsidian-Sync integration for automatic Memory Bank backup. One-way sync (Git → Obsidian Vault) via post-commit hook. Use when setting up a new project, user asks about Obsidian integration, or when troubleshooting sync issues.
+version: 1.5.0
 ---
 
 # Obsidian Integration Skill: Git-Obsidian-Sync
-
-<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 2.20
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2025-11-27 19:30 CET
 
 A plug-and-play system for automatic synchronization of your `memory-bank` with an Obsidian Vault after every Git commit.
 

@@ -1,14 +1,10 @@
 ---
 name: dsgvo
 description: DSGVO/GDPR customer data check for preventing data leaks in Git commits. Automatic detection of customer domains, real email addresses, server paths, and Memory Bank files. Use when setting up public repositories, before making repos public, or when user asks about data protection compliance.
+version: 1.5.0
 ---
 
 # DSGVO Customer Data Check - Integration Skill
-
-<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 1.10
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2025-11-27 20:00 CET
 
 ---
 

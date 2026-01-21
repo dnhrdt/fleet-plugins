@@ -1,14 +1,10 @@
 ---
 name: wordpress
 description: WordPress plugin development standards and patterns. Asset organisation, hook conventions, security practices. Use when developing WordPress plugins or themes.
+version: 1.5.0
 ---
 
 # WordPress Development Skill
-
-<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 1.00
-<!-- ⚠️ STOP: Run `date "+%H:%M"` before changing! -->
-Timestamp: 2026-01-02 00:18 CET
 
 ---
 

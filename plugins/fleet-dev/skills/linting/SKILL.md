@@ -1,13 +1,10 @@
 ---
 name: linting
 description: This skill should be used when the user asks about "linting", "code quality", "eslint", "pylint", or when setting up a new project. Deploys proven configurations (Code Quality Score 10.00/10) for Python, JavaScript, and general projects.
+version: 1.5.0
 ---
 
 # Linting Integration Skill
-
-<!-- ⚠️ STOP: +0.01 minor | +0.10 significant | +1.00 major -->
-Version: 2.20
-Timestamp: 2026-01-20 23:10 CET
 
 ## ⚠️ CRITICAL: Glob and Hidden Files
 
