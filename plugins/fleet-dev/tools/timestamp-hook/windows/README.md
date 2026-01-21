@@ -1,13 +1,13 @@
-# Timestamp Hook - Windows
+# Edit Reminder Hook - Windows
 
-Version: 1.00
-Timestamp: 2026-01-21 18:35 CET
+Version: 2.00
+Timestamp: 2026-01-21 14:30 CET
 
 ---
 
-## Kein Script nötig!
+## No Script Needed
 
-Windows verwendet cmd.exe für Hooks. Der Timestamp-Befehl geht direkt in settings.json.
+Windows uses cmd.exe for hooks. The command goes directly in settings.json.
 
 ## Installation
 
@@ -16,22 +16,13 @@ Add to `C:\Users\[USERNAME]\.claude\settings.json`:
 ```json
 {
   "hooks": {
-    "PreToolUse": [
+    "PostToolUse": [
       {
-        "matcher": "Edit",
+        "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "echo %date% %time% Edit"
-          }
-        ]
-      },
-      {
-        "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo %date% %time% Write"
+            "command": "echo {\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"[CHECK] Time now: %date% %time% - Correct timestamp? English content? Version +0.01?\"}}"
           }
         ]
       }
@@ -42,13 +33,15 @@ Add to `C:\Users\[USERNAME]\.claude\settings.json`:
 
 ## Output
 
+Claude sees after each Edit/Write:
 ```
-21.01.2026 18:35:42,17 Edit
+[CHECK] Time now: 21.01.2026 14:30 - Correct timestamp? English content? Version +0.01?
 ```
 
-Format ist locale-abhängig (deutsches Windows = DD.MM.YYYY).
+Date format is locale-dependent (German Windows = DD.MM.YYYY).
 
-## Wichtig
+## Important
 
-- **KEIN bash, KEIN Script** - cmd.exe versteht `$(date ...)` nicht!
-- Änderungen wirken erst in NEUER Session
+- **NO bash, NO script** - cmd.exe doesn't understand `$(date ...)`!
+- Changes only take effect in NEW sessions
+- Uses `additionalContext` so Claude actually sees the message

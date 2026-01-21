@@ -1,7 +1,10 @@
 #!/bin/bash
-# Timestamp Hook for Claude Code (Linux/Mac)
-# Simple version - just outputs timestamp
+# Edit Reminder Hook for Claude Code (Linux/Mac)
+# Version: 2.00
+# Outputs JSON with additionalContext for Claude visibility
 
-echo "$(date '+%Y-%m-%d %H:%M:%S') $CLAUDE_TOOL_NAME"
+CURRENT_TIME=$(date '+%Y-%m-%d %H:%M')
+
+echo "{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"[CHECK] Time now: ${CURRENT_TIME} - Correct timestamp? English content? Version +0.01?\"}}"
 
 exit 0

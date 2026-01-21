@@ -1,7 +1,6 @@
 ---
 name: feedback
 description: This skill should be used when the user says "feedback", "template feedback", "create issue", at end of project milestones, or after significant rule violations/disasters. Creates structured feedback issues on GitHub for fleet-plugins improvement through question-guided interview.
-version: 1.2.0
 ---
 
 # Feedback Skill

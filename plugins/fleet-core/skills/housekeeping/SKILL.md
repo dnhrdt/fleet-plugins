@@ -1,7 +1,6 @@
 ---
 name: housekeeping
 description: This skill should be used when the user requests "housekeeping", "cleanup memory bank", "optimize documentation", or when Memory Bank files feel cluttered. Manages Memory Bank maintenance through relevance-based archiving - never delete, always archive full details. Critical for maintaining session continuity.
-version: 1.2.0
 ---
 
 # Housekeeping Skill

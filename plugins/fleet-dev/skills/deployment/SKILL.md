@@ -1,7 +1,6 @@
 ---
 name: deployment
 description: Deployment strategies, folder structures, and workflows for creating production-ready releases. Applies to WordPress plugins, Python packages, Node applications, and other software projects. Use when user says "deploy", "release", or needs to package a project for distribution.
-version: 1.5.0
 ---
 
 # Deployment Skill - Best Practices & Workflow

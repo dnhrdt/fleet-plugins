@@ -1,7 +1,6 @@
 ---
 name: setup
 description: This skill should be used when the user asks to "setup a project", "initialize project", "einrichten", "create memory bank", "configure project", or when Memory Bank is missing/incomplete. Creates Memory Bank, configures tools (Obsidian, Linting, DSGVO), initializes Git, and uses fleet-dev plugin tools.
-version: 1.5.0
 ---
 
 # Project Setup Skill

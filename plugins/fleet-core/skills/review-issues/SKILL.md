@@ -1,7 +1,6 @@
 ---
 name: review-issues
 description: This skill should be used when the user says "review issues", "check feedback", "prüfe issues", or at session start to stay current. Reviews open issues from Fleet repositories (fleet-plugins, claude-research), categorizes by type, and proposes changes.
-version: 1.2.0
 ---
 
 # Review Issues Skill

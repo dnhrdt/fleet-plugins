@@ -1,33 +1,24 @@
-# Timestamp Hook - Linux/Mac
+# Edit Reminder Hook - Linux/Mac
 
-Version: 1.00
-Timestamp: 2026-01-21 18:35 CET
+Version: 2.00
+Timestamp: 2026-01-21 14:30 CET
 
 ---
 
-## Option 1: Direkter Befehl (empfohlen)
+## Option 1: Direct Command (Recommended)
 
 Add to `~/.claude/settings.json`:
 
 ```json
 {
   "hooks": {
-    "PreToolUse": [
+    "PostToolUse": [
       {
-        "matcher": "Edit",
+        "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "echo $(date '+%Y-%m-%d %H:%M:%S') Edit"
-          }
-        ]
-      },
-      {
-        "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo $(date '+%Y-%m-%d %H:%M:%S') Write"
+            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"[CHECK] Time now: '$(date '+%Y-%m-%d %H:%M')' - Correct timestamp? English content? Version +0.01?\"}}'"
           }
         ]
       }
@@ -38,13 +29,14 @@ Add to `~/.claude/settings.json`:
 
 ## Output
 
+Claude sees after each Edit/Write:
 ```
-2026-01-21 18:35:42 Edit
+[CHECK] Time now: 2026-01-21 14:30 - Correct timestamp? English content? Version +0.01?
 ```
 
 ## Option 2: Via Script
 
-Falls komplexere Logik nötig:
+For more complex logic:
 
 ```json
 {
@@ -52,9 +44,10 @@ Falls komplexere Logik nötig:
 }
 ```
 
-Siehe `timestamp-hook.sh` in diesem Ordner.
+See `timestamp-hook.sh` in this folder.
 
-## Wichtig
+## Important
 
-- Änderungen wirken erst in NEUER Session
-- Timezone via `TZ="Europe/Berlin"` setzen falls nötig
+- Changes only take effect in NEW sessions
+- Set timezone via `TZ="Europe/Berlin"` if needed
+- Uses `additionalContext` so Claude actually sees the message

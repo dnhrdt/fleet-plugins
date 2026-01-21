@@ -1,7 +1,6 @@
 ---
 name: statusline
 description: Install context-monitor statusline for Claude Code. Shows context usage, model, session metrics. Use when setting up a new workstation or when statusline is missing.
-version: 1.5.0
 ---
 
 # Statusline Setup Skill

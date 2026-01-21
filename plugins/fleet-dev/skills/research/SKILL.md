@@ -1,7 +1,6 @@
 ---
 name: research
 description: This skill should be used when the user says "research", "recherchiere async", "erstelle research issue", or wants to delegate research to background processing. Creates GitHub Issues for async research via GitHub Actions.
-version: 1.5.0
 ---
 
 # Research Skill

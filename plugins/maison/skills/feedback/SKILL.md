@@ -1,7 +1,6 @@
 ---
 name: feedback
 description: This skill should be used when working on Maison projects and encountering bugs, discovering patterns, learning new mechanisms, or gaining insights that should be documented. Creates GitHub Issues in the maison-website-project hub for tracking across all Maison-related work.
-version: 1.0.0
 ---
 
 # Maison Feedback Skill

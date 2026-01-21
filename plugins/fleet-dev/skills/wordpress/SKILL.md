@@ -1,7 +1,6 @@
 ---
 name: wordpress
 description: WordPress plugin development standards and patterns. Asset organisation, hook conventions, security practices. Use when developing WordPress plugins or themes.
-version: 1.5.0
 ---
 
 # WordPress Development Skill
