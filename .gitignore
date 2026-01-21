@@ -1,0 +1,5 @@
+# Memory Bank (contains project-specific context, not for public repos)
+memory-bank/
+
+# Session handoffs
+.session-handoff.md
