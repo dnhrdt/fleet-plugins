@@ -21,16 +21,18 @@ process.stdin.on('end', () => {
       // Block with helpful message
       const response = {
         hookSpecificOutput: {
+          hookEventName: "PreToolUse",
           permissionDecision: "deny"
         },
         systemMessage: `BLOCKED: npm/npx has no stdout in Git Bash on Windows. Use: cmd //c "${command}"`
       };
       console.log(JSON.stringify(response));
-      process.exit(0);  // Exit 0 - JSON response handles the decision
+      process.exit(0);
     } else {
       // Allow all other commands
       const response = {
         hookSpecificOutput: {
+          hookEventName: "PreToolUse",
           permissionDecision: "allow"
         }
       };
@@ -40,7 +42,10 @@ process.stdin.on('end', () => {
   } catch (err) {
     // On parse error, allow (fail open)
     console.log(JSON.stringify({
-      hookSpecificOutput: { permissionDecision: "allow" }
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "allow"
+      }
     }));
     process.exit(0);
   }
