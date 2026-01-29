@@ -26,7 +26,7 @@ process.stdin.on('end', () => {
         systemMessage: `BLOCKED: npm/npx has no stdout in Git Bash on Windows. Use: cmd //c "${command}"`
       };
       console.log(JSON.stringify(response));
-      process.exit(2);
+      process.exit(0);  // Exit 0 - JSON response handles the decision
     } else {
       // Allow all other commands
       const response = {
