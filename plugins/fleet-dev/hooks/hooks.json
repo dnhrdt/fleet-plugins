@@ -1,0 +1,17 @@
+{
+  "description": "Fleet-dev hooks for Windows/Git Bash compatibility",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-npm-npx.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
