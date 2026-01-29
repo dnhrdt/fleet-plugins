@@ -1,6 +1,6 @@
 {
   "name": "fleet-plugins",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Official Fleet plugin repository for Claude Code",
   "owner": {
     "name": "Michael Deinhardt"
@@ -8,21 +8,28 @@
   "plugins": [
     {
       "name": "fleet-core",
-      "version": "1.0.0",
-      "description": "Core utilities - Housekeeping, Debugging, Feedback",
+      "version": "1.2.1",
+      "description": "Core utilities - Housekeeping, Debugging, Feedback, Review-Issues",
       "source": "./plugins/fleet-core",
       "tags": ["core", "housekeeping", "debugging", "feedback"]
     },
     {
       "name": "fleet-dev",
-      "version": "1.2.0",
-      "description": "Development Operations - Setup, Linting, Obsidian, DSGVO, Deployment, Research",
+      "version": "1.5.2",
+      "description": "Development Operations - Setup, Linting, Obsidian, DSGVO, Deployment, WordPress, Statusline, Research",
       "source": "./plugins/fleet-dev",
       "tags": ["development", "linting", "deployment", "obsidian", "dsgvo", "research"]
     },
     {
-      "name": "maison",
+      "name": "fleet-humans",
       "version": "1.0.0",
+      "description": "Personal knowledge management for household members - Quick-note insights about Michael and Sylvia",
+      "source": "./plugins/fleet-humans",
+      "tags": ["personal", "knowledge", "insights", "household"]
+    },
+    {
+      "name": "maison",
+      "version": "1.0.1",
       "description": "Maison project ecosystem - Feedback collection for websites, integrations, server management",
       "source": "./plugins/maison",
       "tags": ["maison", "feedback", "wordpress", "woocommerce"]

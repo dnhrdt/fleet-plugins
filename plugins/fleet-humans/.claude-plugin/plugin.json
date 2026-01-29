@@ -1,0 +1,11 @@
+{
+  "name": "fleet-humans",
+  "version": "1.0.0",
+  "description": "Personal knowledge management for household members. Track insights, preferences, and context about Michael and Sylvie. Moltbot principle: capture immediately, continue working.",
+  "author": {
+    "name": "Michael Deinhardt"
+  },
+  "skills": [
+    "./skills/quick-note"
+  ]
+}

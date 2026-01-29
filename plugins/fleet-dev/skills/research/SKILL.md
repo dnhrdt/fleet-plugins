@@ -51,7 +51,9 @@ Ask user if not clear:
 [Quick (5) | Normal (15) | Deep (25)]
 
 ---
-*Created via Research Skill by Commander Pellaeon*
+*Created via Research Skill by Tron*
+
+@claude please research this topic.
 BODY
 )"
 ```
@@ -95,7 +97,9 @@ Für Fleet-Plugins Hook-Integration. Brauche aktuelle Doku und Beispiele.
 Normal (15)
 
 ---
-*Created via Research Skill by Commander Pellaeon*"
+*Created via Research Skill by Tron*
+
+@claude please research this topic."
 ```
 
 **Response:**
