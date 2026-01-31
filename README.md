@@ -2,7 +2,7 @@
 
 Official plugin repository for the Fleet ecosystem (Claude Code).
 
-**Version:** 1.2.0
+**Version:** 1.2.1
 **Maintainer:** Michael Deinhardt
 **Repository:** https://github.com/dnhrdt/fleet-plugins
 
@@ -14,6 +14,8 @@ Fleet Plugins provide specialized skills for Claude Code instances in the Fleet 
 
 - **fleet-core** - Universal utilities for all Fleet instances
 - **fleet-dev** - Development operations for development workstations
+- **fleet-humans** - Personal insights tracking for household members
+- **maison** - Maison project ecosystem (WordPress Multisite patterns, WPAllImport, feedback)
 
 ---
 
@@ -36,6 +38,44 @@ Fleet Plugins provide specialized skills for Claude Code instances in the Fleet 
 /fleet-core:debugging
 /fleet-core:feedback
 /fleet-core:review-issues
+```
+
+---
+
+### fleet-humans v1.0.0
+
+**Purpose:** Personal insights tracking for household members (Michael, Sylvia).
+
+| Skill | Description | Trigger |
+|-------|-------------|---------|
+| `quick-note` | Capture personal insights during work. Appends to about-michael or about-sylvia directories. | "quick-note", "notieren", "das halte ich fest" |
+
+**Usage:**
+```
+/fleet-humans:quick-note
+```
+
+---
+
+### maison v1.1.0
+
+**Purpose:** Skills for Maison project ecosystem (WordPress Multisite, WPAllImport, integrations).
+
+| Skill | Description | Trigger |
+|-------|-------------|---------|
+| `feedback` | Create feedback issues in maison-website-project repository. | "maison feedback", "maison issue" |
+| `wordpress-patterns` | 8 critical Multisite patterns (hook guards, switch_to_blog, site_option). | "multisite patterns", "hook management" |
+| `wpallimport` | WPAllImport configuration, Carryover Problem, Lookup-Table system. | "wpallimport", "product import", "carryover" |
+| `external-plugins` | Daniel's Multilingual Multisite, ShortPixel, SyncThing interactions. | "daniel's plugin", "plugin conflicts" |
+| `lessons` | 10 critical lessons from 176 sessions plus debugging checklist. | "what went wrong", "maison debugging" |
+
+**Usage:**
+```
+/maison:feedback
+/maison:wordpress-patterns
+/maison:wpallimport
+/maison:external-plugins
+/maison:lessons
 ```
 
 ---

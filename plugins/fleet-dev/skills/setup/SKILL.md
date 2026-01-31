@@ -88,7 +88,9 @@ The setup process has 10 phases. See `references/phases-detailed.md` for complet
 
 **Phase 0**: Check `.claude-init-pending` → if found, load context and skip Phase 1
 
-**Phase 0.5**: Install timestamp hook if not present (once per workstation)
+**Phase 0.5**: Windows CLI check + timestamp hook (once per workstation)
+- On Windows: Verify `CLAUDE_CODE_GIT_BASH_PATH` is set (CRITICAL!)
+- Install timestamp hook if not present
 
 **Phase 1**: Ask project questions (name, type, language, goal, visibility)
 - Skip if fork/clone - see `references/fork-workflow.md`

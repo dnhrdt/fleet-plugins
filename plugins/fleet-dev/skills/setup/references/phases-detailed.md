@@ -43,6 +43,50 @@ fi
 
 ## Phase 0.5: Global Workstation Setup (Once per workstation)
 
+### Windows CLI Check (CRITICAL)
+
+**On Windows, check CLAUDE_CODE_GIT_BASH_PATH before any script execution:**
+
+```bash
+# Check if running on Windows
+if [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "cygwin" ]] || [[ -n "$WINDIR" ]]; then
+    echo "Windows detected - checking Git Bash path..."
+
+    if [[ -z "$CLAUDE_CODE_GIT_BASH_PATH" ]]; then
+        echo ""
+        echo "⚠️  CRITICAL: CLAUDE_CODE_GIT_BASH_PATH not set!"
+        echo ""
+        echo "Without this, Git hooks and bash scripts will fail silently."
+        echo ""
+        echo "Fix: Run in PowerShell (as Administrator):"
+        echo '  setx CLAUDE_CODE_GIT_BASH_PATH "C:\Program Files\Git\bin\bash.exe"'
+        echo ""
+        echo "Then restart Claude Code."
+        echo ""
+        # STOP setup until fixed
+        exit 1
+    else
+        echo "✓ CLAUDE_CODE_GIT_BASH_PATH set: $CLAUDE_CODE_GIT_BASH_PATH"
+    fi
+fi
+```
+
+**Why this is critical:**
+- Claude Code CLI on Windows defaults to cmd.exe for script execution
+- cmd.exe cannot interpret `#!/bin/bash` scripts
+- Git hooks, install scripts, and bash tools fail SILENTLY
+- Symptoms: Hook runs but no effect, npm/npx no stdout
+
+**User action required:**
+```powershell
+# PowerShell (run once, requires restart of Claude Code)
+setx CLAUDE_CODE_GIT_BASH_PATH "C:\Program Files\Git\bin\bash.exe"
+```
+
+---
+
+### Timestamp Hook Installation
+
 **Check and install timestamp hook (GLOBAL - not project-specific):**
 
 ```bash

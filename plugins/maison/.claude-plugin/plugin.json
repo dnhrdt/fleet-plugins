@@ -1,11 +1,15 @@
 {
   "name": "maison",
-  "version": "1.0.1",
-  "description": "Skills for Maison project ecosystem. Feedback collection, patterns, and workflows for all Maison-related development (websites, integrations, server management).",
+  "version": "1.1.0",
+  "description": "Skills for Maison project ecosystem. WordPress Multisite patterns, WPAllImport configuration, external plugin integration, lessons learned, and feedback collection.",
   "author": {
     "name": "Michael Deinhardt"
   },
   "skills": [
-    "./skills/feedback"
+    "./skills/feedback",
+    "./skills/wordpress-patterns",
+    "./skills/wpallimport",
+    "./skills/external-plugins",
+    "./skills/lessons"
   ]
 }
