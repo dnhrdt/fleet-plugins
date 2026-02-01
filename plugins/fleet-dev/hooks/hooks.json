@@ -12,7 +12,7 @@
           },
           {
             "type": "prompt",
-            "prompt": "Check if this Bash command contains 'gh' and 'issue'. If YES: Return permissionDecision 'ask' with reason reminding to use Fleet skills instead of direct gh commands. Mapping: 'gh issue list' or 'gh issue view' → /fleet-core:review-issues skill. 'gh issue create' in claude-research → /fleet-dev:research skill. 'gh issue create' elsewhere → /fleet-core:feedback skill. If NO 'gh' and 'issue' in command: Return permissionDecision 'allow' without comment.",
+            "prompt": "Analyze the Bash command. If it contains both 'gh' and 'issue', return JSON: {\"hookSpecificOutput\":{\"permissionDecision\":\"ask\"},\"systemMessage\":\"STOP: Use Fleet skill instead. gh issue list/view → /fleet-core:review-issues. gh issue create (claude-research) → /fleet-dev:research. gh issue create (other) → /fleet-core:feedback.\"}. If command does NOT contain both 'gh' and 'issue', return: {\"hookSpecificOutput\":{\"permissionDecision\":\"allow\"}}",
             "timeout": 10
           }
         ]
