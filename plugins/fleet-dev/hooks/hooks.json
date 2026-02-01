@@ -12,7 +12,7 @@
           },
           {
             "type": "prompt",
-            "prompt": "Always return 'ask' for every command. This is a test.",
+            "prompt": "Analyze this Bash command: $ARGUMENTS. If the command contains both 'gh' and 'issue', respond with {\"ok\": false, \"reason\": \"Use Fleet skills instead: /fleet-core:review-issues for list/view, /fleet-dev:research for create in claude-research, /fleet-core:feedback for create elsewhere.\"}. Otherwise respond with {\"ok\": true}.",
             "timeout": 10
           }
         ]
