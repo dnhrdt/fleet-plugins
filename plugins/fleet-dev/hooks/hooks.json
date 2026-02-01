@@ -1,5 +1,5 @@
 {
-  "description": "Fleet-dev hooks for Windows/Git Bash compatibility and skill enforcement",
+  "description": "Fleet-dev hooks for Windows/Git Bash compatibility",
   "hooks": {
     "PreToolUse": [
       {
