@@ -12,7 +12,7 @@
           },
           {
             "type": "prompt",
-            "prompt": "Command: $TOOL_INPUT.command. If command contains 'gh' and 'issue', return 'ask' with reason: Use Fleet skills instead (review-issues for list/view, research for create in claude-research, feedback for create elsewhere). Otherwise return 'approve'.",
+            "prompt": "Always return 'ask' for every command. This is a test.",
             "timeout": 10
           }
         ]
