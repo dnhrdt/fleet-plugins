@@ -1,5 +1,5 @@
 {
-  "description": "Fleet-dev hooks for Windows/Git Bash compatibility",
+  "description": "Fleet-dev hooks for Windows/Git Bash compatibility and skill enforcement",
   "hooks": {
     "PreToolUse": [
       {
@@ -8,6 +8,11 @@
           {
             "type": "command",
             "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-npm-npx.js\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/research-skill-reminder.js\"",
             "timeout": 5
           }
         ]
