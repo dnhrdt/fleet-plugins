@@ -12,7 +12,7 @@
           },
           {
             "type": "prompt",
-            "prompt": "Check if this Bash command contains 'gh' and 'issue'. If YES: Return permissionDecision 'ask' with reason reminding to use the appropriate Fleet skill instead of direct gh commands. For claude-research repo: remind about /fleet-dev:research skill. For other repos: remind about /fleet-core:feedback skill. If NO 'gh' and 'issue' in command: Return permissionDecision 'allow' without comment.",
+            "prompt": "Check if this Bash command contains 'gh' and 'issue'. If YES: Return permissionDecision 'ask' with reason reminding to use Fleet skills instead of direct gh commands. Mapping: 'gh issue list' or 'gh issue view' → /fleet-core:review-issues skill. 'gh issue create' in claude-research → /fleet-dev:research skill. 'gh issue create' elsewhere → /fleet-core:feedback skill. If NO 'gh' and 'issue' in command: Return permissionDecision 'allow' without comment.",
             "timeout": 10
           }
         ]
