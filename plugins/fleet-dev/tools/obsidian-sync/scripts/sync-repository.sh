@@ -4,8 +4,8 @@
 # Performs synchronization between Git repository and Obsidian Vault
 # Bash version of the PowerShell script
 #
-# Version: 2.0.2
-# Date: 2025-08-26
+# Version: 2.0.3
+# Date: 2026-02-04
 #
 
 set -euo pipefail
@@ -41,13 +41,20 @@ EOF
 normalize_path() {
     local path="${1}"
 
-    # Convert relative path to absolute
+    # Convert Windows paths (e.g. C:/Users/...) to Git-Bash paths (/c/Users/...)
+    if [[ "${path}" =~ ^([A-Za-z]):(.*) ]]; then
+        local drive_letter="${BASH_REMATCH[1],,}" # to lowercase
+        local rest_of_path="${BASH_REMATCH[2]}"
+        path="/${drive_letter}${rest_of_path}"
+    fi
+
+    # Convert relative path to absolute if it wasn't a Windows path
     if [[ ! "${path}" = /* ]]; then
         path="$(pwd)/${path}"
     fi
 
-    # Normalize path
-    realpath "${path}" 2>/dev/null || echo "${path}"
+    # Normalize path (removes ./ and ../)
+    realpath -m "${path}" 2>/dev/null || echo "${path}"
 }
 
 log() {

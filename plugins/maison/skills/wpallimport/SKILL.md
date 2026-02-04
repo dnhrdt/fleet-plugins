@@ -72,6 +72,9 @@ add_action('pmxi_before_xml_import', 'mmm_build_image_lookup');
 
 // Hook: Per product saved
 add_action('pmxi_saved_post', 'mmm_assign_images_from_lookup', 10, 3);
+
+// Hook: After import ends (publish products with images)
+add_action('pmxi_after_xml_import', 'mmm_publish_products_with_image');
 ```
 
 **Build Lookup Table:**
@@ -233,6 +236,12 @@ WHERE options LIKE '%"is_update_attachments";s:1:"1"%';
 
 ```
 Site 10 (shop/de) → Site 9 (pos) → Site 8 (b2b) → Site 7 (shop/en) → Site 11 (order)
+```
+
+### US Chain
+
+```
+Site 8 (b2b) → Site 7 (shop)
 ```
 
 ### Trigger URL Format

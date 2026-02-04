@@ -58,6 +58,9 @@ try {
 | `add_attachment` | Bidirectional sync loop | `wp_insert_attachment()` |
 | `edit_attachment` | Metadata corruption | Metadata updates |
 | `delete_attachment` | Cascade deletion | Cleanup operations |
+| `updated_post_meta` | Meta sync interference | `update_post_meta()` |
+| `added_post_meta` | Meta sync interference | `add_post_meta()` |
+| `deleted_post_meta` | Meta sync interference | `delete_post_meta()` |
 
 ---
 
@@ -204,7 +207,10 @@ $missing = array_diff($site_1_ids, $synced_ids);
 | 1 | maisoncommon.com | Main site |
 | 6 | maisoncommon.com/en | EN Website |
 | 7 | shop.maisoncommon.com/en | EN Shop |
+| 8 | b2b.maisoncommon.com | B2B Shop |
+| 9 | pos.maisoncommon.com | POS System |
 | 10 | shop.maisoncommon.com/de | DE Shop |
+| 11 | order.maisoncommon.com | Order Portal |
 
 ### Key Meta Keys
 

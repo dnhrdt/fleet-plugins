@@ -26,6 +26,7 @@ Documentation of third-party plugins on Maison sites and their interaction patte
 | WPAllImport | Product import | MEDIUM |
 | ShortPixel | Image optimization | LOW |
 | SyncThing | DE→US file sync | LOW |
+| Force Regenerate Thumbnails | Thumbnail rebuild | LOW |
 
 ---
 
@@ -171,6 +172,32 @@ US Multisite (Target)
 - US doesn't need thumbnail generation
 - DE is source of truth for files
 - US Bulk Register can reuse thumbnails
+
+---
+
+## Force Regenerate Thumbnails
+
+### Purpose
+
+Rebuild all thumbnail sizes for existing images after theme/plugin changes image dimensions.
+
+### When to Use
+
+- After changing registered image sizes in theme
+- After adding new WooCommerce image dimensions
+- When thumbnails appear blurry or wrong size
+
+### Key Behavior
+
+- Processes all attachments in media library
+- Regenerates ALL registered sizes
+- Can be run per-site in Multisite
+
+### Implications
+
+- Safe to use (no data loss)
+- CPU intensive - run during low traffic
+- SyncThing will propagate new thumbnails DE → US
 
 ---
 

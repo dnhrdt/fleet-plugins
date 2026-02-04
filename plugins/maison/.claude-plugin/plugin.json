@@ -1,6 +1,6 @@
 {
   "name": "maison",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Skills for Maison project ecosystem. WordPress Multisite patterns, WPAllImport configuration, external plugin integration, lessons learned, and feedback collection.",
   "author": {
     "name": "Michael Deinhardt"

@@ -161,6 +161,23 @@ SELECT option_value FROM wp_options WHERE option_name = 'siteurl';
 
 ---
 
+### 11. Inline Styles = Systematic Problems
+
+**The Bug (Session 23):** Inline CSS styles scattered throughout templates caused:
+- Inconsistent appearance across pages
+- Impossible to maintain brand consistency
+- Every change required hunting through multiple files
+
+**Root Cause:** Quick fixes added `style="..."` attributes instead of proper CSS classes.
+
+**Rule:**
+- ❌ Never: `<div style="color: red; margin: 10px;">`
+- ✅ Always: `<div class="alert-message">` + CSS file
+
+**Why:** Inline styles are technical debt. One "quick fix" becomes 50 scattered styles that take hours to unify.
+
+---
+
 ## Process Lessons
 
 ### Document Immediately (Moltbot Principle)
