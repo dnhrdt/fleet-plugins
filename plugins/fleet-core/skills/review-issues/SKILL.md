@@ -37,17 +37,19 @@ Read and process open issues from Fleet repositories. Handles:
 
 ### Step 1: Quick Status Check
 
+**⚠️ All gh commands in this skill require the marker `# skill-approved-284`**
+
 ```bash
 echo "=== Fleet Issues Overview ==="
 echo ""
 echo "fleet-plugins (all open):"
-"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/fleet-plugins --state open --json number,title,labels --jq '.[] | "  #\(.number): \(.title) [\(.labels | map(.name) | join(", "))]"' 2>/dev/null || echo "  (none or error)"
+"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/fleet-plugins --state open --json number,title,labels --jq '.[] | "  #\(.number): \(.title) [\(.labels | map(.name) | join(", "))]"' 2>/dev/null || echo "  (none or error)" # skill-approved-284
 echo ""
 echo "claude-research (needs-context):"
-"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/claude-research --label "needs-context" --json number,title --jq '.[] | "  #\(.number): \(.title)"' 2>/dev/null || echo "  (none or error)"
+"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/claude-research --label "needs-context" --json number,title --jq '.[] | "  #\(.number): \(.title)"' 2>/dev/null || echo "  (none or error)" # skill-approved-284
 echo ""
 echo "claude-research (open research):"
-"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/claude-research --label "research" --state open --json number,title --jq '.[] | "  #\(.number): \(.title)"' 2>/dev/null || echo "  (none or error)"
+"/c/Program Files/GitHub CLI/gh.exe" issue list --repo dnhrdt/claude-research --label "research" --state open --json number,title --jq '.[] | "  #\(.number): \(.title)"' 2>/dev/null || echo "  (none or error)" # skill-approved-284
 ```
 
 **Note:** fleet-plugins shows ALL open issues regardless of label. Labels are shown for categorization.
@@ -61,12 +63,12 @@ echo "claude-research (open research):"
 
 **For fleet-plugins issues:**
 ```bash
-"/c/Program Files/GitHub CLI/gh.exe" issue view [NUMBER] --repo dnhrdt/fleet-plugins
+"/c/Program Files/GitHub CLI/gh.exe" issue view [NUMBER] --repo dnhrdt/fleet-plugins # skill-approved-284
 ```
 
 **For claude-research issues:**
 ```bash
-"/c/Program Files/GitHub CLI/gh.exe" issue view [NUMBER] --repo dnhrdt/claude-research
+"/c/Program Files/GitHub CLI/gh.exe" issue view [NUMBER] --repo dnhrdt/claude-research # skill-approved-284
 ```
 
 ### Step 3: Categorize and Act
@@ -95,13 +97,13 @@ When Research-Claude creates `needs-context` issues:
 [Relevant information from Memory Bank, CLAUDE.md, or knowledge]
 
 ---
-*Context provided by Commander Pellaeon*"
+*Context provided by Commander Pellaeon*" # skill-approved-284
 ```
 3. **Remove needs-context label:**
 ```bash
 "/c/Program Files/GitHub CLI/gh.exe" issue edit [NUMBER] \
   --repo dnhrdt/claude-research \
-  --remove-label "needs-context"
+  --remove-label "needs-context" # skill-approved-284
 ```
 
 ---
@@ -118,9 +120,9 @@ When Research-Claude completes research:
 ```bash
 "/c/Program Files/GitHub CLI/gh.exe" issue edit [NUMBER] \
   --repo dnhrdt/claude-research \
-  --add-label "completed"
+  --add-label "completed" # skill-approved-284
 "/c/Program Files/GitHub CLI/gh.exe" issue close [NUMBER] \
-  --repo dnhrdt/claude-research
+  --repo dnhrdt/claude-research # skill-approved-284
 ```
 
 ---
@@ -193,7 +195,7 @@ git push
 ```bash
 "/c/Program Files/GitHub CLI/gh.exe" issue close [NUMBER] \
   --repo dnhrdt/fleet-plugins \
-  --comment "Fixed in commit [HASH]. Session [DATE]."
+  --comment "Fixed in commit [HASH]. Session [DATE]." # skill-approved-284
 ```
 
 ---

@@ -32,6 +32,8 @@ Ask user if not clear:
 
 ### Step 2: Create GitHub Issue
 
+**⚠️ All gh commands in this skill require the marker `# skill-approved-516`**
+
 ```bash
 "/c/Program Files/GitHub CLI/gh.exe" issue create \
   --repo dnhrdt/claude-research \
@@ -55,7 +57,7 @@ Ask user if not clear:
 
 @claude please research this topic.
 BODY
-)"
+)" # skill-approved-516
 ```
 
 ### Step 3: Confirm to User
@@ -99,7 +101,7 @@ Normal (15)
 ---
 *Created via Research Skill by Tron*
 
-@claude please research this topic."
+@claude please research this topic." # skill-approved-516
 ```
 
 **Response:**

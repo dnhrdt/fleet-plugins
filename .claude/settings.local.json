@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd //c \"c:\\\\Tools\\\\DCG\\\\dcg.exe validate C:/Users/Michael.DEINHARDT/.config/dcg/packs/fleet.yaml\")",
+      "Bash(cmd //c \"c:\\\\Tools\\\\DCG\\\\dcg.exe --help\")",
+      "Bash(cmd //c \"set DCG_VERBOSE=3 && c:\\\\Tools\\\\DCG\\\\dcg.exe packs 2>&1\")"
+    ]
+  }
+}

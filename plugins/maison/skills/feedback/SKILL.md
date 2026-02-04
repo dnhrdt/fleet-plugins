@@ -53,6 +53,8 @@ Keep it lean - details go in the issue body.
 
 ## Create GitHub Issue
 
+**⚠️ All gh commands in this skill require the marker `# skill-approved-092`**
+
 ```bash
 "/c/Program Files/GitHub CLI/gh.exe" issue create \
   --repo dnhrdt/maison-website-project \
@@ -93,7 +95,7 @@ Keep it lean - details go in the issue body.
 ---
 *Created via maison:feedback Skill*
 BODY
-)"
+)" # skill-approved-092
 ```
 
 ## Confirm to User
@@ -116,10 +118,10 @@ Project name and area are in the issue title/body - no need for extra labels.
 
 ```bash
 # List all feedback
-gh issue list --repo dnhrdt/maison-website-project --label "feedback"
+gh issue list --repo dnhrdt/maison-website-project --label "feedback" # skill-approved-092
 
 # List pending
-gh issue list --repo dnhrdt/maison-website-project --label "pending"
+gh issue list --repo dnhrdt/maison-website-project --label "pending" # skill-approved-092
 ```
 
 ## Processing Feedback
@@ -127,10 +129,10 @@ gh issue list --repo dnhrdt/maison-website-project --label "pending"
 After implementing:
 ```bash
 # Mark as processed
-gh issue edit [NUMBER] --remove-label "pending" --add-label "processed" --repo dnhrdt/maison-website-project
+gh issue edit [NUMBER] --remove-label "pending" --add-label "processed" --repo dnhrdt/maison-website-project # skill-approved-092
 
 # Close
-gh issue close [NUMBER] --repo dnhrdt/maison-website-project
+gh issue close [NUMBER] --repo dnhrdt/maison-website-project # skill-approved-092
 ```
 
 ---
