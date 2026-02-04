@@ -1,6 +1,6 @@
 {
   "name": "fleet-core",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "Core utilities for all Fleet instances. Includes housekeeping, debugging, feedback, and review-issues skills.",
   "author": {
     "name": "Michael Deinhardt"

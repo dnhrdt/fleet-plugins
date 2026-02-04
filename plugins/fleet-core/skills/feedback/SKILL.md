@@ -1,27 +1,34 @@
 ---
 name: feedback
-description: This skill should be used when the user says "feedback", "template feedback", "create issue", at end of project milestones, or after significant rule violations/disasters. Creates structured feedback issues on GitHub for fleet-plugins improvement through question-guided interview.
+description: This skill should be used when the user says "feedback", "template feedback", "create issue", at end of project milestones, or after significant rule violations/disasters. Creates structured feedback issues on GitHub. Supports multi-repo messaging with --repo parameter.
 ---
 
 # Feedback Skill
 
 ## Purpose
 
-Collect structured feedback from projects → Create GitHub Issue → Improve Fleet plugins/templates
+**Two modes:**
 
-## ⚠️ MIGRATION NOTICE
+1. **Fleet Feedback** (default): Structured interview → GitHub Issue in fleet-plugins
+2. **Cross-Repo Message** (--repo): Quick message to any dnhrdt/* repo
 
-**Old system:** Local files in `claude-init/feedback-inbox/`
-**New system:** GitHub Issues in `dnhrdt/fleet-plugins`
+## Quick Reference
 
-This skill now creates GitHub Issues instead of local files.
+```bash
+# Fleet-plugins feedback (full interview)
+/fleet-core:feedback
+
+# Message to another repo (simple)
+/fleet-core:feedback --repo claude-research
+/fleet-core:feedback --repo maison-website-project
+```
 
 ## Trigger
 
 **Explicit (user says):**
 - "feedback", "template feedback", "feedback für fleet-plugins"
 - "create issue", "file issue", "GitHub issue"
-- "we should document this", "this needs to be recorded"
+- "notify [repo]", "message to [repo]"
 
 **Situational (auto-recognize):**
 - After significant error/problem/bug
@@ -29,23 +36,82 @@ This skill now creates GitHub Issues instead of local files.
 - After "near-disaster"
 - End of project milestone
 - Pattern discovered worth sharing
+- Need to leave a note for yourself in another repo
 
 **SELF-CHECK (CRITICAL!):**
 When recognizing an error/bug/problem in a skill/workflow:
 → **STOP** - Do NOT execute `gh issue create` directly!
 → Load this skill
-→ Go through the interview process
-→ The skill ensures all relevant information is captured
-
-**Why?** The gh commands and repo are known. Training says "be efficient, do it directly". But the interview process captures structured information that would otherwise be forgotten. COMPLIANCE > HELPFULNESS.
+→ The skill ensures proper routing and formatting
 
 ## Prerequisites
 
 - GitHub CLI (`gh`) available
 - Authenticated to GitHub (`gh auth status`)
-- Repository: `dnhrdt/fleet-plugins`
 
-## Collect Feedback
+---
+
+## Mode 1: Cross-Repo Message (--repo)
+
+**Use when:** You need to leave a note for yourself in another repo.
+
+This is **not** a formal feedback process - just a message/reminder for when you next work in that repo.
+
+**⚠️ All gh commands in this skill require the marker `# skill-approved-739`**
+
+```bash
+"/c/Program Files/GitHub CLI/gh.exe" issue create \
+  --repo dnhrdt/[TARGET-REPO] \
+  --title "[Brief descriptive title]" \
+  --body "$(cat <<'BODY'
+## Message
+
+[What you want to communicate]
+
+## Context
+
+- **Source:** [Current project/repo]
+- **Date:** [YYYY-MM-DD]
+- **Reason:** [Why this is relevant for target repo]
+
+---
+*Cross-repo message via Feedback Skill*
+BODY
+)" # skill-approved-739
+```
+
+**No labels, no interview.** Just a simple issue as a note to yourself.
+
+**Example:**
+```bash
+"/c/Program Files/GitHub CLI/gh.exe" issue create \
+  --repo dnhrdt/claude-research \
+  --title "Obsidian research results available in Tron Memory Bank" \
+  --body "$(cat <<'BODY'
+## Message
+
+Tron completed Obsidian MCP research. Results are in fleet-plugins Memory Bank
+under Session 178-179. Ready for integration into claude-research workflow.
+
+## Context
+
+- **Source:** fleet-plugins
+- **Date:** 2026-02-04
+- **Reason:** Research findings need to be processed here
+
+---
+*Cross-repo message via Feedback Skill*
+BODY
+)" # skill-approved-739
+```
+
+---
+
+## Mode 2: Fleet Feedback (default)
+
+**Use when:** Providing structured feedback about fleet-plugins itself.
+
+**Repository:** `dnhrdt/fleet-plugins`
 
 ### Question-Guided Interview
 
@@ -85,6 +151,8 @@ Ask User sequentially, then create GitHub Issue:
 - Blocker / High / Medium / Low?
 
 ## Create GitHub Issue
+
+**⚠️ All gh commands in this skill require the marker `# skill-approved-739`**
 
 ```bash
 "/c/Program Files/GitHub CLI/gh.exe" issue create \
@@ -145,7 +213,7 @@ Ask User sequentially, then create GitHub Issue:
 ---
 *Created via Feedback Skill by Commander Pellaeon*
 BODY
-)"
+)" # skill-approved-739
 ```
 
 ## Confirm to User
@@ -168,7 +236,7 @@ Labels: feedback, pending
 
 Add `blocker` label if priority is Blocker:
 ```bash
-gh issue edit [NUMBER] --add-label "blocker" --repo dnhrdt/fleet-plugins
+gh issue edit [NUMBER] --add-label "blocker" --repo dnhrdt/fleet-plugins # skill-approved-739
 ```
 
 ## What Makes Good Feedback
@@ -188,13 +256,13 @@ gh issue edit [NUMBER] --add-label "blocker" --repo dnhrdt/fleet-plugins
 
 ```bash
 # List all feedback issues
-gh issue list --repo dnhrdt/fleet-plugins --label "feedback"
+gh issue list --repo dnhrdt/fleet-plugins --label "feedback" # skill-approved-739
 
 # List pending feedback
-gh issue list --repo dnhrdt/fleet-plugins --label "pending"
+gh issue list --repo dnhrdt/fleet-plugins --label "pending" # skill-approved-739
 
 # View specific issue
-gh issue view [NUMBER] --repo dnhrdt/fleet-plugins
+gh issue view [NUMBER] --repo dnhrdt/fleet-plugins # skill-approved-739
 ```
 
 ## Processing Feedback (for Maintainer)
@@ -202,12 +270,12 @@ gh issue view [NUMBER] --repo dnhrdt/fleet-plugins
 After processing feedback:
 ```bash
 # Mark as processed
-gh issue edit [NUMBER] --remove-label "pending" --add-label "processed" --repo dnhrdt/fleet-plugins
+gh issue edit [NUMBER] --remove-label "pending" --add-label "processed" --repo dnhrdt/fleet-plugins # skill-approved-739
 
 # Close if completed
-gh issue close [NUMBER] --repo dnhrdt/fleet-plugins
+gh issue close [NUMBER] --repo dnhrdt/fleet-plugins # skill-approved-739
 ```
 
 ---
 
-*Part of fleet-dev plugin - Will move to fleet-core later*
+*Part of fleet-core plugin*
