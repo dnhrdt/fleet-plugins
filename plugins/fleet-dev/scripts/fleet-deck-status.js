@@ -1,43 +1,50 @@
 #!/usr/bin/env node
 /**
- * Fleet Deck Status Hook for fleet-dev plugin
+ * Fleet Deck Status Hook for fleet-dev plugin (v2 - non-blocking)
  * Updates .fleet-deck-status.json in the project directory
  *
  * Usage: node fleet-deck-status.js [EventName]
  * Events: SessionStart, PostToolUse, Stop, Notification, SessionEnd
+ *
+ * Reads stdin synchronously to avoid blocking Claude Code's input
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// Get event from command line arg (fallback to stdin parsing)
+// Get event from command line arg
 const eventArg = process.argv[2];
 
-// Read hook input from stdin
-let input = '';
-process.stdin.setEncoding('utf8');
-process.stdin.on('data', chunk => input += chunk);
-process.stdin.on('end', () => {
-  try {
-    const hookData = input ? JSON.parse(input) : {};
-    updateStatus(hookData, eventArg);
-  } catch (err) {
-    // Silent fail - don't break Claude's workflow
-    process.exit(0);
+// Quick synchronous stdin read with immediate timeout
+let hookData = {};
+try {
+  // Only try to read stdin if there's data available (non-blocking check)
+  if (process.stdin.isTTY === false) {
+    const chunks = [];
+    const BUFSIZE = 256;
+    let buf = Buffer.alloc(BUFSIZE);
+    let bytesRead;
+
+    // Set stdin to non-blocking
+    try {
+      fs.readSync(0, buf, 0, BUFSIZE, null);
+      // If we got here, there's data
+      const input = buf.toString('utf8').trim();
+      if (input) {
+        hookData = JSON.parse(input);
+      }
+    } catch (e) {
+      // No data available or read error - that's fine
+    }
   }
-});
+} catch (e) {
+  // stdin not available - that's fine
+}
 
-// Timeout fallback if no stdin (some events might not provide input)
-setTimeout(() => {
-  updateStatus({}, eventArg);
-}, 100);
-
-let hasRun = false;
+// Run immediately
+updateStatus(hookData, eventArg);
 
 function updateStatus(hookData, event) {
-  if (hasRun) return;
-  hasRun = true;
-
   const projectDir = hookData.cwd || process.env.CLAUDE_PROJECT_DIR || process.cwd();
   const statusFile = path.join(projectDir, '.fleet-deck-status.json');
 
@@ -109,22 +116,18 @@ function updateStatus(hookData, event) {
 
   // Output empty JSON (hook success)
   console.log('{}');
-  process.exit(0);
 }
 
 function getInstanceName(projectDir) {
-  // Check for .fleet-deck.json config
   const configFile = path.join(projectDir, '.fleet-deck.json');
   if (fs.existsSync(configFile)) {
     try {
       const config = JSON.parse(fs.readFileSync(configFile, 'utf8'));
       if (config.instance) return config.instance;
     } catch (e) {
-      // Fall through to default
+      // Fall through
     }
   }
-
-  // Default: use folder name
   return path.basename(projectDir);
 }
 
@@ -133,7 +136,7 @@ function readExistingStatus(statusFile) {
     try {
       return JSON.parse(fs.readFileSync(statusFile, 'utf8'));
     } catch (e) {
-      // Return empty object if file is corrupt
+      // Corrupt file
     }
   }
   return {};
