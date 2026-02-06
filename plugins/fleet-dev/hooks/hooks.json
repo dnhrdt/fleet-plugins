@@ -1,13 +1,12 @@
 {
-  "description": "Fleet-dev hooks - Fleet Deck status updates + DCG for command blocking",
+  "description": "Fleet-dev hooks - Fleet Deck status updates for all session events",
   "hooks": {
-    "SessionStart": [
+    "UserPromptSubmit": [
       {
-        "matcher": "*",
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/fleet-deck-status.js\" SessionStart",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/fleet-deck-status.js\" UserPromptSubmit",
             "timeout": 5
           }
         ]
@@ -39,11 +38,23 @@
     ],
     "Notification": [
       {
-        "matcher": "*",
+        "matcher": "permission_prompt",
         "hooks": [
           {
             "type": "command",
             "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/fleet-deck-status.js\" Notification",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/fleet-deck-status.js\" PermissionRequest",
             "timeout": 5
           }
         ]
