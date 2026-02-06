@@ -107,6 +107,11 @@ function updateStatus(hookData, event) {
   status.instance = status.instance || instanceName;
   status.project = status.project || projectDir;
 
+  // Session identity (native from Claude Code)
+  status.session_id = hookData.session_id || status.session_id;
+  status.transcript_path = hookData.transcript_path || status.transcript_path;
+  status.session_started = status.session_started || new Date().toISOString();
+
   // Write status file
   try {
     fs.writeFileSync(statusFile, JSON.stringify(status, null, 2));

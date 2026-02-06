@@ -1,6 +1,6 @@
 {
   "name": "fleet-dev",
-  "version": "1.5.12",
+  "version": "1.5.13",
   "description": "Development Operations for Fleet projects. Includes setup, linting, obsidian sync, dsgvo check, deployment, wordpress, statusline, and research skills.",
   "author": {
     "name": "Michael Deinhardt"
