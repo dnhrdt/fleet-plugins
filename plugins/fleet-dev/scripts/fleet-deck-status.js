@@ -1,127 +1,117 @@
 #!/usr/bin/env node
 /**
- * Fleet Deck Status Hook for fleet-dev plugin (v2 - non-blocking)
+ * Fleet Deck Status Hook for fleet-dev plugin (v6)
  * Updates .fleet-deck-status.json in the project directory
  *
  * Usage: node fleet-deck-status.js [EventName]
- * Events: SessionStart, PostToolUse, Stop, Notification, SessionEnd
+ * Events: UserPromptSubmit, PostToolUse, Stop, Notification, PermissionRequest, SessionEnd
  *
- * Reads stdin synchronously to avoid blocking Claude Code's input
+ * CHANGELOG:
+ * v6 (2026-02-08): PostToolUse only changes status if blocked → running (permission granted)
+ *                   Fixes 7-8 sec latency (stdin blocking) and missing red for PermissionRequest
+ * v5 (2026-02-05): Added event logging
+ * v4 (2026-02-05): DESTROY STDIN immediately to fix Windows blocking
+ * v3 (2026-02-05): No stdin at all - still blocked (Windows bug)
+ * v2 (2026-02-05): Sync stdin read - blocked on Windows (fs.readSync hangs 7-8 sec)
+ * v1 (2026-02-04): Async stdin listeners - blocked Claude input
+ *
+ * CRITICAL FIX (v4+): stdin must be destroyed IMMEDIATELY.
+ * On Windows, fs.readSync(0,...) on stdin hangs for 7-8 seconds even with
+ * "non-blocking" patterns. This blocks the entire hook and delays status updates.
+ * Trade-off: We lose hookData fields (tool_name, session_id, etc.) but gain
+ * reliable instant status updates. Project dir comes from CLAUDE_PROJECT_DIR env.
  */
+
+// IMMEDIATELY destroy stdin to release the handle - BEFORE anything else
+process.stdin.destroy();
 
 const fs = require('fs');
 const path = require('path');
 
 // Get event from command line arg
-const eventArg = process.argv[2];
+const event = process.argv[2] || 'unknown';
 
-// Quick synchronous stdin read with immediate timeout
-let hookData = {};
-try {
-  // Only try to read stdin if there's data available (non-blocking check)
-  if (process.stdin.isTTY === false) {
-    const chunks = [];
-    const BUFSIZE = 256;
-    let buf = Buffer.alloc(BUFSIZE);
-    let bytesRead;
+// Get project directory from env (Claude Code sets this)
+const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
+const statusFile = path.join(projectDir, '.fleet-deck-status.json');
 
-    // Set stdin to non-blocking
-    try {
-      fs.readSync(0, buf, 0, BUFSIZE, null);
-      // If we got here, there's data
-      const input = buf.toString('utf8').trim();
-      if (input) {
-        hookData = JSON.parse(input);
-      }
-    } catch (e) {
-      // No data available or read error - that's fine
-    }
-  }
-} catch (e) {
-  // stdin not available - that's fine
-}
+// Determine instance name
+const instanceName = getInstanceName(projectDir);
 
-// Run immediately
-updateStatus(hookData, eventArg);
+// Read existing status or create new
+let status = readExistingStatus(statusFile);
+const previousStatus = status.status || 'none';
 
-function updateStatus(hookData, event) {
-  const projectDir = hookData.cwd || process.env.CLAUDE_PROJECT_DIR || process.cwd();
-  const statusFile = path.join(projectDir, '.fleet-deck-status.json');
+// Update based on event
+switch (event) {
+  case 'SessionStart':
+  case 'UserPromptSubmit':
+    // UserPromptSubmit: User sent a prompt → session is active
+    // NOTE: SessionStart is BROKEN on Windows (Issue #9542) - use UserPromptSubmit instead
+    status.status = 'running';
+    status.needs_attention = false;
+    status.attention_reason = null;
+    status.last_activity = new Date().toISOString();
+    // Initialize if new session
+    if (!status.instance) status.instance = instanceName;
+    if (!status.project) status.project = projectDir;
+    if (status.context_percent === undefined) status.context_percent = 0;
+    break;
 
-  // Determine instance name
-  const instanceName = getInstanceName(projectDir);
+  case 'SessionEnd':
+    status.status = 'stopped';
+    status.last_activity = new Date().toISOString();
+    status.needs_attention = false;
+    break;
 
-  // Read existing status or create new
-  let status = readExistingStatus(statusFile);
-
-  // Use event from arg or hookData
-  const hookEvent = event || hookData.hook_event_name || 'unknown';
-
-  switch (hookEvent) {
-    case 'SessionStart':
-      status = {
-        instance: instanceName,
-        project: projectDir,
-        status: 'running',
-        context_percent: 0,
-        needs_attention: false,
-        attention_reason: null,
-        last_activity: new Date().toISOString(),
-        last_tool: null,
-        error: null
-      };
-      break;
-
-    case 'SessionEnd':
-      status.status = 'stopped';
-      status.last_activity = new Date().toISOString();
-      status.needs_attention = false;
-      break;
-
-    case 'PostToolUse':
+  case 'PostToolUse':
+    // Only change status if currently blocked (= permission was just granted)
+    // This avoids thousands of unnecessary status writes per session
+    // (PostToolUse fires 3x more than UserPromptSubmit - ~43/session avg)
+    if (previousStatus === 'blocked') {
       status.status = 'running';
-      status.last_activity = new Date().toISOString();
-      status.last_tool = hookData.tool_name || null;
       status.needs_attention = false;
       status.error = null;
-      break;
+    }
+    // Always update activity timestamp
+    status.last_activity = new Date().toISOString();
+    break;
 
-    case 'Notification':
-      status.needs_attention = true;
-      status.attention_reason = 'Notification pending';
-      status.last_activity = new Date().toISOString();
-      break;
+  case 'Notification':
+  case 'PermissionRequest':
+    // URGENT: Claude is blocked, needs permission/input to continue
+    status.status = 'blocked';
+    status.needs_attention = true;
+    status.attention_reason = 'Permission or input required';
+    status.last_activity = new Date().toISOString();
+    break;
 
-    case 'Stop':
-      status.status = 'waiting';
-      status.needs_attention = true;
-      status.attention_reason = hookData.stop_hook_reason || 'Task completed or waiting';
-      status.last_activity = new Date().toISOString();
-      break;
+  case 'Stop':
+    status.status = 'waiting';
+    status.needs_attention = true;
+    status.attention_reason = 'Task completed or waiting';
+    status.last_activity = new Date().toISOString();
+    break;
 
-    default:
-      status.last_activity = new Date().toISOString();
-  }
-
-  // Ensure instance name is set
-  status.instance = status.instance || instanceName;
-  status.project = status.project || projectDir;
-
-  // Session identity (native from Claude Code)
-  status.session_id = hookData.session_id || status.session_id;
-  status.transcript_path = hookData.transcript_path || status.transcript_path;
-  status.session_started = status.session_started || new Date().toISOString();
-
-  // Write status file
-  try {
-    fs.writeFileSync(statusFile, JSON.stringify(status, null, 2));
-  } catch (err) {
-    // Silent fail
-  }
-
-  // Output empty JSON (hook success)
-  console.log('{}');
+  default:
+    status.last_activity = new Date().toISOString();
 }
+
+// Ensure instance name is set
+status.instance = status.instance || instanceName;
+status.project = status.project || projectDir;
+
+// Write status file
+try {
+  fs.writeFileSync(statusFile, JSON.stringify(status, null, 2));
+} catch (err) {
+  // Silent fail
+}
+
+// Output empty JSON (hook success) and exit immediately
+console.log('{}');
+
+// === Helper Functions ===
 
 function getInstanceName(projectDir) {
   const configFile = path.join(projectDir, '.fleet-deck.json');
