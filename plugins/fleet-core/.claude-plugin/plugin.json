@@ -1,7 +1,7 @@
 {
   "name": "fleet-core",
-  "version": "1.3.0",
-  "description": "Core utilities for all Fleet instances. Includes housekeeping, debugging, feedback, review-issues, and session-inspector skills.",
+  "version": "1.4.0",
+  "description": "Core utilities for all Fleet instances. Includes housekeeping, debugging, feedback, review-issues, review-pr, and session-inspector skills.",
   "author": {
     "name": "Michael Deinhardt"
   },
@@ -10,6 +10,7 @@
     "./skills/debugging",
     "./skills/feedback",
     "./skills/review-issues",
+    "./skills/review-pr",
     "./skills/session-inspector"
   ]
 }
