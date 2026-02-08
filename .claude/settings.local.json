@@ -3,7 +3,20 @@
     "allow": [
       "Bash(cmd //c \"c:\\\\Tools\\\\DCG\\\\dcg.exe validate C:/Users/Michael.DEINHARDT/.config/dcg/packs/fleet.yaml\")",
       "Bash(cmd //c \"c:\\\\Tools\\\\DCG\\\\dcg.exe --help\")",
-      "Bash(cmd //c \"set DCG_VERBOSE=3 && c:\\\\Tools\\\\DCG\\\\dcg.exe packs 2>&1\")"
+      "Bash(cmd //c \"set DCG_VERBOSE=3 && c:\\\\Tools\\\\DCG\\\\dcg.exe packs 2>&1\")",
+      "Bash(/c/Tools/DCG/dcg.exe packs:*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" pr list --state all --json number,title,state,author,headRefName --limit 5)",
+      "Bash(c:ToolsDCGdcg.exe test \"gh pr merge 14 --repo dnhrdt/fleet-plugins\")",
+      "Bash(c:ToolsDCGdcg.exe test \"gh pr close 14\")",
+      "Bash(c:ToolsDCGdcg.exe test \"gh pr review 14 --approve\")",
+      "Bash(c:ToolsDCGdcg.exe test \"gh pr comment 14 --body test\")",
+      "Bash(/c/Tools/DCG/dcg.exe test:*)",
+      "Bash(/c/Tools/DCG/dcg.exe:*)",
+      "Bash(cmd //c \"claude plugin update fleet-core@fleet-plugins --scope user\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Michael.DEINHARDT\\.claude",
+      "C:\\Users\\Michael.DEINHARDT\\.config\\dcg"
     ]
   }
 }
